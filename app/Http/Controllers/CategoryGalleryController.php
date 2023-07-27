@@ -99,8 +99,10 @@ class CategoryGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CategoryGallery $categoryGallery)
+    public function destroy($slug)
     {
         //
+        $category = CategoryGallery::where('slug', $slug)->first();
+        $category->delete() ? back()->with('message', 'Category Berhasil Dihapus.') : back()->with('error', 'Category Gagal Dihapus.');
     }
 }

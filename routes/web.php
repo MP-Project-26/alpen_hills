@@ -40,5 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/category/add', [CategoryGalleryController::class, 'store'])->name('galleryCategoryAdmin.store');
     Route::delete('/admin/category/delete/{slug}', [CategoryGalleryController::class, 'destroy'])->name('galleryCategoryAdmin.destroy');
     Route::post('/admin/category/update/{slug}', [CategoryGalleryController::class, 'update'])->name('galleryCategoryAdmin.update');
+    
+
 });
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import moment from "moment/moment";
 import ModalTambahCategoryGallery from "./ModalTambahCategoryGallery";
 import ModalEditCategoryGallery from "./ModalEditCategoryGallery";
+import { router } from "@inertiajs/react";
 
 
 
@@ -14,6 +15,18 @@ const TableCategoryGallery = ({ categoryGallery }) => {
         window.modal_edit_category_gallery.showModal();
         setEditCategory(item);
     }
+
+    const deleteCategoryGalleryHandle = (e, slug) => {
+        e.preventDefault();
+        if (confirm("Apakah anda yakin ingin menghapus data ini ?")) {
+            router.delete(`/admin/category/delete/${slug}`, {
+                onSuccess: () => {
+                    
+                },
+            });
+        }
+    };
+
     return (
         <div className="overflow-x-auto bg-white shadow">
             <div className="w-full md:pr-5  pl-3 py-4 md:relative sticky z-10 left-0 flex flex-col md:flex-row gap-3">
@@ -58,7 +71,11 @@ const TableCategoryGallery = ({ categoryGallery }) => {
                                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     <i className="fas fa-edit"></i>
                                 </button>
-                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                <button
+                                onClick={(e) =>
+                                        deleteCategoryGalleryHandle(e, item.slug)
+                                    }
+                                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                     <i className="fas fa-trash-alt"></i>
                                 </button>
                             </td>
