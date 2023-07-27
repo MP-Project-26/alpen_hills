@@ -18,7 +18,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('Home');
+
 });
 
 Route::get('/admin/login', [LoginAdmin::class, 'index'])->name('login')->middleware('guest');
