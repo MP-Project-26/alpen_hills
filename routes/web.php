@@ -53,4 +53,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->name('userAdmin.index')->middleware('super_admin');
+Route::post('/admin/user/add', [AdminUserController::class, 'store'])->name('userAdmin.store')->middleware('super_admin');
+Route::get('admin/user/role/{id}', [AdminUserController::class, 'role'])->name('userAdmin.role')->middleware('super_admin');
+Route::delete('/admin/user/delete/{user}', [AdminUserController::class, 'destroy'])->name('userAdmin.destroy')->middleware('super_admin');
+Route::post('/admin/user/update/{id}', [AdminUserController::class, 'update'])->name('userAdmin.update')->middleware('super_admin');
+
 

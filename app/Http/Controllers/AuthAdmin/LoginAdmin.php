@@ -26,14 +26,6 @@ class LoginAdmin extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(LoginRequest $request): RedirectResponse
@@ -41,30 +33,6 @@ class LoginAdmin extends Controller
         $request->authenticate();
         $request->session()->regenerate();
         return redirect()->intended(RouteServiceProvider::HOME);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
     }
 
     /**
