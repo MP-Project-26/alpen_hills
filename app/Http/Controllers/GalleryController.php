@@ -22,9 +22,9 @@ class GalleryController extends Controller
         //
     }
 
-    public function indexAdmin(Request $request)
+    public function indexAdmin()
     {
-        $search = $request->query('search');
+        $search = request()->query('search');
 
         // Query untuk mengambil data galleries yang berlasi dengan categoryGallery dan tipeProperty
         $galleryQuery = Gallery::with(['categoryGallery', 'tipeProperty']);

@@ -2,13 +2,17 @@ import MenuDashboard from "@/utils/MenuDashboard";
 import { Link } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
 
-const Sidebar = ({ isSidebarOpen }) => {
+const Sidebar = ({ isSidebarOpen, auth }) => {
     const [activeMenu, setActiveMenu] = useState(null);
 
     useEffect(() => {
-      const active = MenuDashboard.find((menu) => window.location.pathname.startsWith(menu.url));
-      setActiveMenu(active);
+        const active = MenuDashboard.find((menu) =>
+            window.location.pathname.startsWith(menu.url)
+        );
+        setActiveMenu(active);
     }, []);
+
+    console.log(auth.user.role);
 
     return (
         <aside
@@ -42,6 +46,18 @@ const Sidebar = ({ isSidebarOpen }) => {
                                     </li>
                                 </Link>
                             ))}
+                        <hr />
+
+                        {auth.user?.role === 1 ? (
+                            <Link href="/admin/user" className="cursor-pointer">
+                                <li className="font-medium w-full rounded-md text-gray-700 p-2 flex gap-2 items-center hover:text-black hover:bg-slate-200">
+                                    <i className="text-xl fas fa-users"></i>
+                                    User Management
+                                </li>
+                            </Link>
+                        ) : (
+                            ""
+                        )}
                     </ul>
                 </div>
             </div>

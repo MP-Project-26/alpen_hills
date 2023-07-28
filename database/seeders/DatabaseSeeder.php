@@ -14,13 +14,25 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::create([
-            'name' => 'Test User',
-            'email' => 'test@gmail.com',
-            'password' => bcrypt('password'),
-            'remember_token' => \Illuminate\Support\Str::random(10),
-            'created_at' => now(),
-            'updated_at' => now(),
+        \App\Models\User::insert([
+            [
+                'name' => 'Test User',
+                'email' => 'test@gmail.com',
+                'password' => bcrypt('password'),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+                'role' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Putut Budiutomo',
+                'email' => 'pututbudiutomo88@gmail.com',
+                'password' => bcrypt('password'),
+                'remember_token' => \Illuminate\Support\Str::random(10),
+                'role' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 }
