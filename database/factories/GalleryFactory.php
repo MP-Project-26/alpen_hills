@@ -18,10 +18,13 @@ class GalleryFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->sentence(mt_rand(2, 4)),
+            'name' => $this->faker->sentence(mt_rand(3, 3)),
             'slug' => $this->faker->slug(),
-            'image' => $this->faker->image('public/storage/images/gallery/', 640, 480, null, false),
-            'category_gallery_id' => $this->faker->numberBetween(1, 4),
+            'image' => $this->faker->image('public/storage/images/gallery/', 800, 480, null, false),
+            'category_gallery_id' => $this->faker->numberBetween(1, 5),
+            'tipe_property_id' => $this->faker->numberBetween(1, 2),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

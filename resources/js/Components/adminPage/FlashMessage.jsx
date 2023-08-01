@@ -34,7 +34,7 @@ const FlashMessage = ({flash}) => {
                         )}
 
                         {alertMessage.error && (
-                            <i class="fas fa-exclamation-triangle px-2"></i>
+                            <i className="fas fa-exclamation-triangle px-2"></i>
                         )}
                     </div>
 

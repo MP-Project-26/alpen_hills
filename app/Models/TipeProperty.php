@@ -14,4 +14,9 @@ class TipeProperty extends Model
     {
         return $this->hasMany(Gallery::class, 'tipe_property_id');
     }
+
+    public function spefisikasiProperty()
+    {
+        return $this->hasMany(SpefisikasiProperty::class, 'tipe_property_id');
+    }
 }

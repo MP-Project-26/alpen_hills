@@ -12,8 +12,6 @@ const Sidebar = ({ isSidebarOpen, auth }) => {
         setActiveMenu(active);
     }, []);
 
-    console.log(auth.user.role);
-
     return (
         <aside
             className={`h-screen lg:w-80 shadow-md  w-[100%] lg:relative absolute z-10 ${

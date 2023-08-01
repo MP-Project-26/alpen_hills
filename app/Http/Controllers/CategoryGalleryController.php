@@ -77,12 +77,16 @@ class CategoryGalleryController extends Controller
         $request->validate(
             [
                 'name' => 'required|string|max:255|unique:category_galleries,name,',
+                'slug' => 'required|string|max:255',
             ],
             [
                 'name.required' => 'Nama kategori wajib diisi',
                 'name.string' => 'Nama kategori harus berupa string',
                 'name.max' => 'Nama kategori maksimal 255 karakter',
                 'name.unique' => 'Nama kategori sudah ada',
+                'slug.required' => 'Slug wajib diisi',
+                'slug.string' => 'Slug harus berupa string',
+                'slug.max' => 'Slug maksimal 255 karakter',
             ]
         );
 

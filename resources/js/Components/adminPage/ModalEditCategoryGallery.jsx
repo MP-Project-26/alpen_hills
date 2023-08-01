@@ -1,26 +1,30 @@
-
 import React, { useEffect } from "react";
 import InputError from "../Form/InputError";
 import { router, useForm } from "@inertiajs/react";
-
+import slugify from "slugify";
 
 const ModalEditCategoryGallery = ({ ...props }) => {
     const { data, setData, post, errors, reset } = useForm({
         name: "",
+        slug: "",
     });
 
     useEffect(() => {
         setData((prevData) => ({
-          ...prevData,
-          name: props?.editCategory?.name || "",
+            ...prevData,
+            name: props?.editCategory?.name || "",
+            slug: props?.editCategory?.slug || "",
         }));
-      }, [props.editCategory]);
-
+    }, [props.editCategory]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setData((prevData) => ({ ...prevData, [name]: value }));
-
+        if (name === "name") {
+            const slug = slugify(value, { lower: true, strict: true });
+            setData((prevData) => ({ ...prevData, [name]: value, slug }));
+        } else {
+            setData((prevData) => ({ ...prevData, [name]: value }));
+        }
     };
 
     const submitHandler = (e) => {
@@ -32,7 +36,7 @@ const ModalEditCategoryGallery = ({ ...props }) => {
             },
             onError: (errors) => {
                 console.log(errors);
-            }
+            },
         });
     };
 
@@ -47,7 +51,9 @@ const ModalEditCategoryGallery = ({ ...props }) => {
                     className="modal-box max-w-5xl lg:w-[30%] md:w-[60%] rounded-md"
                 >
                     <button
-                        onClick={() => window.modal_edit_category_gallery.close()}
+                        onClick={() =>
+                            window.modal_edit_category_gallery.close()
+                        }
                         className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                     >
                         ✕
@@ -72,6 +78,23 @@ const ModalEditCategoryGallery = ({ ...props }) => {
                                 />
                                 <InputError
                                     message={errors.name}
+                                    className="mt-1"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="slug">Slug :</label>
+                                <input
+                                    className="rounded-md"
+                                    disabled
+                                    type="text"
+                                    id="slug"
+                                    name="slug"
+                                    value={data.slug}
+                                    onChange={handleChange}
+                                />
+                                <InputError
+                                    message={errors.slug}
                                     className="mt-1"
                                 />
                             </div>

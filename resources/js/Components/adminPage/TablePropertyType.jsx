@@ -1,18 +1,41 @@
 import React, { useState } from "react";
 import moment from "moment/moment";
-import { router } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import ModalTambahTypeProperty from "./ModalTambahTypeProperty";
-
-
+import ModalEditTypeProperty from "./ModalEditTypeProperty";
 
 const TablePropertyType = ({ propertyType }) => {
+    console.log(propertyType);
+
+    const [editTypeProperty, setEditTypeProperty] = useState(null);
+
+    const editTypePropertyHandle = (e, item) => {
+        e.preventDefault();
+        setEditTypeProperty(item);
+        window.modal_edit_type_property.showModal();
+    };
+
+    const deleteTypePropertyHandle = (e, slug) => {
+        e.preventDefault();
+        if (confirm("Are you sure you want to delete this item?")) {
+            router.delete(`/admin/typeProperty/delete/${slug}`, {
+                preserveScroll: true,
+                onSuccess: () => {},
+                onError: (errors) => {
+                    console.log(errors);
+                },
+            });
+        }
+    };
 
     return (
         <div className="overflow-x-auto bg-white shadow">
             <div className="w-full md:pr-5  pl-3 py-4 md:relative sticky z-10 left-0 flex flex-col md:flex-row gap-3">
                 <div className="w-full flex">
                     <button
-                        onClick={() => window.modal_tambah_type_property.showModal()}
+                        onClick={() =>
+                            window.modal_tambah_type_property.showModal()
+                        }
                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2  px-4 rounded w-auto"
                     >
                         Tambah Category <i className="fas fa-plus"></i>
@@ -46,16 +69,26 @@ const TablePropertyType = ({ propertyType }) => {
                                 )}
                             </td>
                             <td className="flex gap-3 items-center">
+                                <Link
+                                href={`/admin/typeProperty/${item.id}`}
+                                className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
+                                    Spesifikasi
+                                </Link>
+
                                 <button
-                                onClick={(e) => editTypeProperty(e, item)}
-                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    onClick={(e) =>
+                                        editTypePropertyHandle(e, item)
+                                    }
+                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                >
                                     <i className="fas fa-edit"></i>
                                 </button>
                                 <button
-                                onClick={(e) =>
+                                    onClick={(e) =>
                                         deleteTypePropertyHandle(e, item.slug)
                                     }
-                                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                >
                                     <i className="fas fa-trash-alt"></i>
                                 </button>
                             </td>
@@ -64,6 +97,7 @@ const TablePropertyType = ({ propertyType }) => {
                 </tbody>
             </table>
             <ModalTambahTypeProperty />
+            <ModalEditTypeProperty editTypeProperty={editTypeProperty} />
         </div>
     );
 };

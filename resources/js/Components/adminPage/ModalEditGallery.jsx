@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import InputError from "../Form/InputError";
 import { router, useForm } from "@inertiajs/react";
+import slugify from "slugify";
 
 
 const ModalEditGallery = ({ ...props }) => {
@@ -9,6 +10,7 @@ const ModalEditGallery = ({ ...props }) => {
         name: "",
         category_gallery_id: "",
         tipe_property_id:"",
+        slug: "",
         image: null,
     });
 
@@ -19,16 +21,21 @@ const ModalEditGallery = ({ ...props }) => {
             name: props.editGallery.name || "",
             category_gallery_id: props.editGallery.category_gallery_id || "",
             tipe_property_id: props.editGallery.tipe_property_id || "",
+            slug: props.editGallery.slug || "",
             image: null,
           });
         }
       }, [props.editGallery]);
 
 
-    const handleChange = (e) => {
+      const handleChange = (e) => {
         const { name, value } = e.target;
-        setData((prevData) => ({ ...prevData, [name]: value }));
-
+        if (name === "name") {
+            const slug = slugify(value, { lower: true, strict: true });
+            setData((prevData) => ({ ...prevData, [name]: value, slug }));
+        } else {
+            setData((prevData) => ({ ...prevData, [name]: value }));
+        }
     };
 
     const submitHandler = (e) => {
@@ -81,6 +88,23 @@ const ModalEditGallery = ({ ...props }) => {
                                 />
                                 <InputError
                                     message={errors.name}
+                                    className="mt-1"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="slug">Nama Gambar :</label>
+                                <input
+                                    className="rounded-md"
+                                    type="text"
+                                    id="slug"
+                                    disabled
+                                    name="slug"
+                                    value={data.slug}
+                                    onChange={handleChange}
+                                />
+                                <InputError
+                                    message={errors.slug}
                                     className="mt-1"
                                 />
                             </div>

@@ -59,12 +59,12 @@ const Header = ({ auth, toggleSidebar, isSidebarOpen }) => {
         {isDropdownOpen && (
           <ul className="absolute top-10 right-0 bg-white p-2 shadow">
             <li>
-              <a
-                href="/profil"
+              <Link
+                href={`/admin/profile/${auth.user.id}`}
                 className="text-gray-800 hover:bg-gray-200 block px-4 py-2 rounded"
               >
                 Profile
-              </a>
+              </Link>
             </li>
             <li>
               <Link

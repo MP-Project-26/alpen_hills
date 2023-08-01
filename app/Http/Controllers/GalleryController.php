@@ -51,7 +51,7 @@ class GalleryController extends Controller
 
         $gallery = new GalleriesCollection($galleryQuery->paginate(5));
         $categoryGallery = CategoryGallery::all();
-        $propertyType = TipeProperty::all();
+        $propertyType = TipeProperty::with('spefisikasiProperty')->get();
 
 
         return Inertia::render('Admin/Gallery/index', [
@@ -90,9 +90,10 @@ class GalleryController extends Controller
     {
 
             $request->validate([
-                'name' => 'required',
+                'name' => 'required|unique:galleries,name,' . $slug . ',slug',
                 'category_gallery_id' => 'required',
                 'tipe_property_id' => 'required',
+                'slug' => 'required',
             ], [
                 'name.required' => 'Nama Gallery tidak boleh kosong.',
                 'category_gallery_id.required' => 'Kategori Gallery tidak boleh kosong.',
@@ -118,12 +119,14 @@ class GalleryController extends Controller
                 $imageName = $request->image->getClientOriginalName();
                 $imagePath = $request->file('image')->storeAs('public/images/gallery', $imageName);
                 $gallery->name = $request->name;
+                $gallery->slug = $request->slug;
                 $gallery->category_gallery_id = $request->category_gallery_id;
                 $gallery->tipe_property_id = $request->tipe_property_id;
                 $gallery->image = $imageName;
                 $gallery->save() ? back()->with('message', 'Gallery Berhasil Diupdate.') : back()->with('error', 'Gallery Gagal Diupdate.');
             }else{
                 $gallery->name = $request->name;
+                $gallery->slug = $request->slug;
                 $gallery->category_gallery_id = $request->category_gallery_id;
                 $gallery->tipe_property_id = $request->tipe_property_id;
                 $gallery->save() ? back()->with('message', 'Gallery Berhasil Diupdate.') : back()->with('error', 'Gallery Gagal Diupdate.');

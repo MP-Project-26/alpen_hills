@@ -91,7 +91,7 @@ const TableGallery = ({ gallery, categoryGallery, meta, propertyType, }) => {
                                     "DD MMMM YYYY h:mm a"
                                 )}
                             </td>
-                            <td className="md:space-x-2 space-y-2">
+                            <td className="flex flex-col md:flex-row gap-2">
                                 <button
                                     onClick={(e) =>
                                         detailGalleryHandle(e, item)

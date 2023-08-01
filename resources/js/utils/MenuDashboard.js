@@ -11,7 +11,7 @@ const MenuDashboard = [
     },
     {
         name: 'Blog Management',
-        url: '/admin/blog',
+        url: '/admin/post',
         icon: 'fas fa-blog'
     },
     {

@@ -55,16 +55,16 @@ const TableUser = ({ users }) => {
                                     "DD MMMM YYYY h:mm a"
                                 )}
                             </td>
-                            <td className="flex gap-3 items-center">
+                            <td className="flex flex-wrap gap-3 items-center justify-center md:justify-start" >
                                 {item.role === 0 ? (
                                     <>
-                                        <div className="dropdown dropdown-left dropdown-end">
-                                            <label
+                                        <div className="dropdown dropdown-left dropdown-end ">
+                                            <button
                                                 tabIndex={0}
                                                 className="bg-yellow-400 font-medium cursor-pointer p-3 rounded-lg text-white m-1"
                                             >
                                                 Ganti Role
-                                            </label>
+                                            </button>
                                             <ul
                                                 tabIndex={0}
                                                 className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52"
@@ -84,7 +84,7 @@ const TableUser = ({ users }) => {
                                             onClick={(e) =>
                                                 deleteUserHandle(e, item.id)
                                             }
-                                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded "
                                         >
                                             <i className="fas fa-trash-alt"></i>
                                         </button>

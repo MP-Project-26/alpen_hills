@@ -7,31 +7,32 @@ import TablePropertyType from "@/Components/adminPage/TablePropertyType";
 import FlashMessage from "@/Components/adminPage/FlashMessage";
 
 const index = ({ ...props }) => {
-    console.log("props", props);
     const [galleryActive, setGalleryActive] = useState(true);
     const [categoryGalleryActive, setCategoryGalleryActive] = useState(false);
     const [typePropertyActive, setTypePropertyActive] = useState(false);
+
 
 
     const toggleGallery = () => {
         setGalleryActive(!galleryActive);
         setCategoryGalleryActive(false);
         setTypePropertyActive(false);
+      
     };
 
     const toggleCategoryGallery = () => {
         setCategoryGalleryActive(!categoryGalleryActive);
         setGalleryActive(false);
         setTypePropertyActive(false);
+      
     };
 
     const toggleTypeProperty = () => {
         setTypePropertyActive(!typePropertyActive);
         setGalleryActive(false);
         setCategoryGalleryActive(false);
+      
     };
-
-
 
 
     return (
@@ -70,6 +71,7 @@ const index = ({ ...props }) => {
                         >
                             Type Property
                         </li>
+
                     </ul>
                 </header>
 
@@ -99,6 +101,8 @@ const index = ({ ...props }) => {
                     {typePropertyActive && props.propertyType && (
                         <TablePropertyType propertyType={props.propertyType} />
                     )}
+
+
                 </div>
             </div>
         </AdminLayout>

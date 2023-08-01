@@ -23,7 +23,7 @@ class UpdateGalleryRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|unique:galleries,name',
-            'slug' => 'required|max:255|unique:galleries,slug',
+            'slug' => 'required|max:255|',
             'category_gallery_id' => 'required|exists:category_galleries,id',
             'tipe_property_id' => 'required|exists:tipe_properties,id',
         ];
@@ -37,7 +37,7 @@ class UpdateGalleryRequest extends FormRequest
             'name.unique' => 'Nama Gallery sudah ada.',
             'slug.required' => 'Slug harus diisi.',
             'slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
-            'slug.unique' => 'Slug sudah ada.',
+            
             'category_gallery_id.required' => 'Kategori Gallery harus diisi.',
             'category_gallery_id.exists' => 'Kategori Gallery tidak valid.',
             'tipe_property_id.required' => 'Tipe Property harus diisi.',
