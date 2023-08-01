@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryGalleryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TipePropertyController;
 use Illuminate\Support\Facades\Route;
@@ -22,12 +23,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
+Route::middleware('guest')->prefix('admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'store'])->name('login.store');
+
 });
 
-Route::get('/admin/login', [AuthController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/admin/login', [AuthController::class, 'store'])->name('login.store')->middleware('guest');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 
 Route::middleware('auth')->group(function () {

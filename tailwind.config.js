@@ -3,8 +3,8 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 
-
-module.exports ={
+const withMT = require("@material-tailwind/react/utils/withMT");
+module.exports = withMT({
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -30,4 +30,4 @@ module.exports ={
     plugins: [
         forms,
         require("daisyui")],
-};
+});
