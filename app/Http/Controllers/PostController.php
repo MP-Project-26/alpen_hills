@@ -44,7 +44,7 @@ class PostController extends Controller
             });
         }
 
-        $post = new PostsCollection($postQuery->paginate(10));
+        $post = new PostsCollection($postQuery->paginate(2));
         $categoryPost = CategoryPost::all();
 
 

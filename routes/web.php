@@ -26,12 +26,16 @@ use Inertia\Inertia;
 Route::middleware('guest')->prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login', [AuthController::class, 'store'])->name('login.store');
-
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/blog',  function () {
+    return Inertia::render('Blog');
+})->name('blog');
 
-
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/profile/{user}', [AuthController::class, 'show'])->name('profile.show');
@@ -73,8 +77,6 @@ Route::middleware('auth')->group(function () {
 
     //Comments Management
     Route::delete('/admin/comment/delete/{comment}', [CommentController::class, 'destroy'])->name('commentsAdmin.destroy');
-
-
 });
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->name('userAdmin.index')->middleware('super_admin');
@@ -82,5 +84,3 @@ Route::post('/admin/user/add', [AdminUserController::class, 'store'])->name('use
 Route::get('admin/user/role/{id}', [AdminUserController::class, 'role'])->name('userAdmin.role')->middleware('super_admin');
 Route::delete('/admin/user/delete/{user}', [AdminUserController::class, 'destroy'])->name('userAdmin.destroy')->middleware('super_admin');
 Route::post('/admin/user/update/{id}', [AdminUserController::class, 'update'])->name('userAdmin.update')->middleware('super_admin');
-
-
