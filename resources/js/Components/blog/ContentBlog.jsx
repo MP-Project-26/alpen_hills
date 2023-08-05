@@ -7,8 +7,6 @@ import ReactPaginate from "react-paginate";
 import { useEffect } from "react";
 import parse from "html-react-parser";
 import ModalComments from "../modal/modalComments";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faRightLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function ContentBlog({
     data: dataBlog,
@@ -89,10 +87,10 @@ export default function ContentBlog({
                                             href={`/blog/spesifik/${item.id}`}
                                             className=" bg-white flex justify-center items-center cursor-pointer"
                                         >
-                                            <FontAwesomeIcon
-                                                icon={faArrowRight}
-                                                className="text-primary-custom cursor-pointer text-3xl px-4 "
-                                            />
+                                            <i
+                                                className="fas fa-arrow-right text-primary-custom
+                                            cursor-pointer text-3xl px-4"
+                                            ></i>
                                         </Link>
                                     </div>
                                 </div>
