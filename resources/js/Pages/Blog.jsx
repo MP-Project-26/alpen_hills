@@ -8,9 +8,11 @@ import ContentBlog from "@/Components/blog/ContentBlog";
 import PopularBlog from "@/Components/blog/PopularBlog";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import RecentPost from "@/Components/blog/RecentPost";
 
 export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
     const [data, setData] = useState([]);
+    const [recent, setRecent] = useState([]);
     const [pupular, setPupular] = useState([]);
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
@@ -22,6 +24,14 @@ export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
             (a, b) => b.views - a.views
         );
         setPupular(dataPopularBlog.slice(0, 3));
+    }, [datas.data]);
+
+    useEffect(() => {
+        // buatkan useEffect untuk mengambil data dan membandingkan terbaru
+        const dataRecent = [...datas.data].sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+        setRecent(dataRecent.slice(0, 3));
     }, [datas.data]);
 
     const handelData = async () => {
@@ -95,6 +105,7 @@ export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
                             </div>
                             {/* Popular Posts */}
                             <PopularBlog data={pupular} />
+                            <RecentPost data={recent} />
                         </div>
                     </div>
                 </div>

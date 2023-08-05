@@ -4,7 +4,7 @@ import moment from "moment/moment";
 import axios from "axios";
 import parse from "html-react-parser";
 
-export default function PopularBlog({ data }) {
+export default function RecentPost({ data }) {
     const addViewCount = async (dataView) => {
         await axios.put(`/blog/view/${dataView.id}`, dataView, {
             headers: {
@@ -15,7 +15,7 @@ export default function PopularBlog({ data }) {
     return (
         <div className=" px-10 pb-5 w-full border-primary-custom border-[2px] flex flex-col gap-4 bg-white">
             <p className="bg-primary-custom w-full text-center font-medium text-2xl text-white p-2 font-roboto">
-                Popular Posts
+                Recent Posts
             </p>
             {data.map((item, index) => (
                 <div

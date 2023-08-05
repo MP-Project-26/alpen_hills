@@ -40,6 +40,11 @@ export default function ContentBlog({
 
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
+        window.scrollTo({
+            top: 60,
+            behavior: "smooth",
+        });
+
         const newOffset = (event.selected * 2) % dataBlog.length;
         // console.log(
         //     `User requested page number ${event.selected}, which is offset ${newOffset}`
