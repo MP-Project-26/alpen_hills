@@ -21,13 +21,17 @@ export default function PopularBlog({ data }) {
                     key={index}
                     className="p-5 flex flex-row gap-6 lg:gap-2 justify-center items-center"
                 >
-                    <img src={item.image} alt="" className="w-[45%]" />
-                    <div className="flex flex-col gap-1">
+                    <img
+                        src={`/storage/images/blog/${item.image}`}
+                        alt=""
+                        className="w-[45%]"
+                    />
+                    <div className="flex flex-col gap-1 w-[10rem]">
                         <p className="font-roboto text-xl font-medium paragraph-popular">
                             {item.title}
                         </p>
                         <p className="font-roboto text-md font-semibold text-green-custom">
-                            {item.author} | Property
+                            {item.category_post.name} | Property
                         </p>
                         <div className="w-[50%] flex gap-5">
                             <div className="flex flex-row gap-2 text-xs items-center">
@@ -122,7 +126,7 @@ export default function PopularBlog({ data }) {
                                 </defs>
                             </svg>
                             <p className="text-xs font-semibold font-roboto">
-                                {moment(item.createdAt).fromNow()}
+                                {moment(item?.created_at).fromNow()}
                             </p>
                         </div>
                     </div>

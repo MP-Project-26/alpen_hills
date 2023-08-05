@@ -163,7 +163,7 @@ export default function About() {
                         iste quam placeat at voluptatem ratione quo laudantium.
                     </p>
                 </div>
-                <div className="flex lg:flex-row flex-col gap-5 ">
+                <div className="flex lg:flex-row flex-col flex-wrap justify-center gap-5 ">
                     {new Array(4).fill(0).map((_, i) => (
                         <div
                             className="card w-80 lg:w-96 bg-base-100 shadow-xl"

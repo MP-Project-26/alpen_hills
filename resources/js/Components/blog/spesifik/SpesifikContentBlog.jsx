@@ -18,7 +18,7 @@ export default function SpesifikContentBlog({ dataContent: item }) {
         textAreaRef.current.style.height =
             textAreaRef.current.scrollHeight + "px";
     };
-
+    // console.log(item);
     useEffect(() => {
         resizeTextArea();
     }, [data.note]);
@@ -54,15 +54,15 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                 <span className="text-3xl lg:text-6xl font-semibold text-primary-custom">
                     {item.title}
                 </span>
-                <p className="text-md lg:text-xl font-semibold ">
-                    {moment(item?.created_at).format("DD MMMM YYYY")}-{" "}
-                    {item.author} - {"Property"}
+                <p className="text-md lg:text-xl font-semibold text-gray-600">
+                    {moment(item?.created_at).format("DD MMMM YYYY")} by{" "}
+                    {item.user_post.name}
                 </p>
                 <div className=" relative " data-aos="fade-right">
                     <img
-                        src={item.image}
+                        src={`/storage/images/blog/${item.image}`}
                         alt=""
-                        className="w-[90%] lg:w-full"
+                        className="w-full"
                     />{" "}
                     <div className="absolute top-2 right-2 ">
                         <div className="flex  flex-row">
@@ -107,21 +107,21 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                     data-aos="fade-up"
                     data-aos-anchor-placement="top-bottom"
                 >
-                    {parse(item.content)}
+                    {parse(item.body)}
                 </div>
                 {/* <div className="border border-gray-500 w-full"></div> */}
                 <div className="comment  space-y-9">
                     <h1 className="text-3xl lg:text-5xl font-semibold text-primary-custom">
-                        Comments (2)
+                        Comments ({item?.comments?.length})
                     </h1>
                     <div className=" space-y-5 w-[20rem] lg:w-full ">
-                        {dataComments
-                            ? dataComments.map((item, i) => (
+                        {item?.comments
+                            ? item?.comments.map((item, i) => (
                                   <div
                                       key={i}
-                                      className="w-full  bg-white justify-center rounded-[1rem] flex flex-col gap-6 "
+                                      className="w-full  bg-white justify-center flex flex-col gap-6 "
                                   >
-                                      <div className="flex flex-row items-center gap-4 w-full bg-white  rounded-t-[1rem] px-8 py-4">
+                                      <div className="flex flex-row items-center gap-4 w-full bg-white  px-5 py-4">
                                           <img
                                               src={
                                                   "/storage/images/content/blog/logo-comment.png"
@@ -136,16 +136,16 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                                               <p className="font-roboto font-normal text-xs text-gray-500">
                                                   {/* 10 Seccond Ago in  */}
                                                   {moment(
-                                                      parseInt(item.createdAt)
+                                                      item?.created_at
                                                   ).fromNow()}
                                               </p>
                                           </div>
                                       </div>
-                                      <p className=" m-0  font-roboto font-medium text-sm lg:text-lg  px-5 pb-8 break-words ">
-                                          {item.note}
+                                      <p className=" m-0  font-roboto font-normal text-sm lg:text-lg  px-5 pb-8 break-words ">
+                                          {item?.comment}
                                       </p>
                                       <div className="px-5 -mt-5">
-                                          <div className="border-[1px] border-gray-400 w-full"></div>
+                                          <div className=" border-gray-500 border-b-[2px] w-full"></div>
                                       </div>
                                   </div>
                               ))
@@ -192,17 +192,22 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                                 {/* buatkan display option anonymous */}
                                 <div className="flex items-center gap-2">
                                     <input
+                                        name="anonymous"
+                                        id="anonymous"
                                         type="checkbox"
                                         className="h-4 w-4"
                                     />
-                                    <p className="font-roboto font-semibold text-md flex items-center">
+                                    <label
+                                        htmlFor="anonymous"
+                                        className="font-roboto font-semibold text-md flex items-center"
+                                    >
                                         Display as Anonymous ( Optional )
-                                    </p>
+                                    </label>
                                 </div>
 
                                 <button
                                     type="sumbit"
-                                    className="h-12 w-24  rounded-tl-none text-white bg-primary-custom font-roboto font-medium"
+                                    className="h-12 w-24 cursor-pointer rounded-tl-none text-white bg-primary-custom font-roboto font-medium"
                                 >
                                     Submit
                                 </button>

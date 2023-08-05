@@ -16,9 +16,28 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function blog($slug = null)
     {
-        //
+        $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->latest();
+        $post = new PostsCollection($postQuery->get());
+
+        return Inertia::render('Blog', [
+            'title' => 'Blog',
+            'dataBlog' => $post,
+            'dataPopular' => $post,
+        ]);
+    }
+    public function blogSpesifik($id)
+    {
+        $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->where('id', $id)->latest();
+        $postPopular = Post::with(['categoryPost', 'userPost', 'comments'])->latest();
+        $post = new PostsCollection($postQuery->get());
+        $popular = new PostsCollection($postPopular->get());
+        return Inertia::render('blog/[...id]', [
+            'title' => 'Blog Spesifik',
+            'dataContent' => $post,
+            'dataPopular' => $popular,
+        ]);
     }
 
     public function indexByAdmin($slug = null)
@@ -138,8 +157,6 @@ class PostController extends Controller
         }
 
         $post->save() ? back()->with('message', 'Post Berhasil Diupdate.') : back()->with('error', 'Post Gagal Diupdate.');
-
-
     }
 
     /**
@@ -150,6 +167,5 @@ class PostController extends Controller
         //delete post imgae
         Storage::delete('public/images/blog/' . $post->image);
         $post->delete() ? back()->with('message', 'Post Berhasil Dihapus.') : back()->with('error', 'Post Gagal Dihapus.');
-
     }
 }

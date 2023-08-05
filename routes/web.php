@@ -29,12 +29,13 @@ Route::middleware('guest')->prefix('admin')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/blog',  function () {
-    return Inertia::render('Blog');
-})->name('blog');
-Route::get('/blog/spesifik/{id}',  function () {
-    return Inertia::render('blog/[...id]');
-})->name('blog');
+
+Route::get('/blog', [PostController::class, 'blog'])->name('blog');
+
+// Route::get('/blog/spesifik/{id}',  function () {
+//     return Inertia::render('blog/[...id]');
+// })->name('blog');
+Route::get('/blog/spesifik/{id}', [PostController::class, 'blogSpesifik'])->name('blog');
 
 Route::get('/about', function () {
     return Inertia::render('About');

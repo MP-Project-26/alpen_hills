@@ -7,6 +7,8 @@ import ReactPaginate from "react-paginate";
 import { useEffect } from "react";
 import parse from "html-react-parser";
 import ModalComments from "../modal/modalComments";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faRightLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function ContentBlog({
     data: dataBlog,
@@ -17,15 +19,14 @@ export default function ContentBlog({
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [Loading, setLoading] = useState(false);
-    // const [itemOffset, setItemOffset] = useState(0);
 
-    const addViewCount = async (dataView) => {
-        await axios.put(`/blog/view/${dataView.id}`, dataView, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-    };
+    // const addViewCount = async (dataView) => {
+    //     await axios.put(`/blog/view/${dataView.id}`, dataView, {
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     });
+    // };
 
     useEffect(() => {
         setLoading(true);
@@ -51,27 +52,40 @@ export default function ContentBlog({
             <div className="px-5 w-full lg:w-[65%] flex flex-col gap-[5rem]">
                 {currentItems.map((item, index) => (
                     <div className=" space-y-7" key={index}>
-                        <div className=" relative " data-aos="fade-right">
+                        <div className=" relative w-full" data-aos="fade-right">
                             <img
-                                src={item.image}
+                                src={`/storage/images/blog/${item.image}`}
                                 alt=""
-                                className="w-[90%] lg:w-full"
+                                className="w-full"
                             />
                             <div className="absolute top-0 left-0 w-full h-full">
                                 <div className="bg-gradient-custom w-full h-full "></div>
                             </div>
-                            <div className="absolute bottom-10 left-10 ">
-                                <div className="flex flex-col gap-5">
+                            <div className="relative">
+                                <div className="absolute bottom-[7rem] left-10 ">
                                     <span className="text-6xl font-semibold text-white">
                                         {item.title}
                                     </span>
-                                    <div className="border border-white p-3 flex flex-row items-center gap-3">
-                                        <span className="bg-white px-3 py-1 font-semibold">
-                                            Category :
-                                        </span>
-                                        <p className="text-white ">
-                                            Lorem ipsum dolor sit amet.
-                                        </p>
+                                </div>
+                                <div className="absolute bottom-10 left-10 ">
+                                    <div className="flex flex-row gap-5">
+                                        <div className="border border-white p-3 flex flex-row items-center gap-3">
+                                            <span className="bg-white px-3 py-1 font-semibold">
+                                                Category :
+                                            </span>
+                                            <p className="text-white ">
+                                                {item.category_post.name}
+                                            </p>
+                                        </div>
+                                        <Link
+                                            href={`/blog/spesifik/${item.id}`}
+                                            className=" bg-white flex justify-center items-center cursor-pointer"
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faArrowRight}
+                                                className="text-primary-custom cursor-pointer text-3xl px-4 "
+                                            />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -156,40 +170,13 @@ export default function ContentBlog({
                                 </div>
                             </div>
                         </div>{" "}
-                        <p className="text-xl font-semibold ">
+                        <p className="text-xl font-semibold text-gray-600">
                             {moment(item?.created_at).format("DD MMMM YYYY")}-{" "}
-                            {item.author} - {"Property"}
+                            {item.user_post.name} - {"Property"}
                         </p>
-                        {/* <div className="text-green-custom flex flex-row items-center gap-5 font-semibold text-xl">
-                            <p>Tags</p> <p> : </p>
-                            {item.tags.map((tag, index) => (
-                                <Link
-                                    href={`/blog/tag/${tag}`}
-                                    key={index}
-                                    className="rounded-md px-4 py-1 bg-primary-custom text-white"
-                                >
-                                    {tag}
-                                </Link>
-                            ))}
-                        </div> */}
                         <div className="text-lg text-justify text-black paragraph-Blog font-roboto font-medium max-w-full">
-                            {parse(item.content)}
+                            {parse(item.body)}
                         </div>
-                        {/* <div className="w-full flex justify-between items-center">
-                            <div className="flex  flex-row">
-                                <div className="w-50 flex justify-end">
-                                    <Link
-                                        onClick={() => {
-                                            addViewCount(item);
-                                        }}
-                                        href={`/blog/spesifik/${item.id}`}
-                                        className=" font-semibold text-xl text-white  bg-primary-custom rounded-r-[2rem] rounded-tl-none rounded-bl-[2rem] px-3 py-2 lg:px-[3.4rem] lg:py-[1.2rem]"
-                                    >
-                                        MORE
-                                    </Link>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 ))}
                 <ReactPaginate
