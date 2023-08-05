@@ -28,7 +28,6 @@ use Inertia\Inertia;
 Route::middleware('guest')->prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login', [AuthController::class, 'store'])->name('login.store');
-
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

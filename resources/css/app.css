@@ -3,24 +3,21 @@
 @tailwind utilities;
 
 @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  from {
+    opacity: 0;
   }
 
-  /* button value aria-label="Insert File" hidden */
-  button[aria-label="Insert file"], button[aria-label="Insert Image"], button[aria-label="Insert youtube/vimeo video"] {
-    display: none;
+  to {
+    opacity: 1;
   }
-  .jodit-status-bar__item-right {
-    display: none;
+}
+
+.animate-fadeIn {
+  animation-name: fadeIn;
+}
+
+@layer components {
+  .bg-prymary {
+    @apply bg-[#213559];
   }
-
-
-
-  .animate-fadeIn {
-    animation-name: fadeIn;
 }
