@@ -101,7 +101,7 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                     </div>
                 </div>
                 <div
-                    className="pl-8 text-lg text-justify text-black font-roboto font-medium max-w-full"
+                    className="text-lg text-justify text-black font-roboto font-medium max-w-full"
                     data-aos="fade-up"
                     data-aos-anchor-placement="top-bottom"
                 >
