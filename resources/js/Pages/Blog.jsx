@@ -27,12 +27,11 @@ export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
     }, [datas.data]);
 
     useEffect(() => {
-        // buatkan useEffect untuk mengambil data dan membandingkan terbaru
-        const dataRecent = [...datas.data].sort(
+        const dataRecent = [...allDataBlog.data].sort(
             (a, b) => new Date(b.created_at) - new Date(a.created_at)
         );
         setRecent(dataRecent.slice(0, 3));
-    }, [datas.data]);
+    }, [allDataBlog.data]);
 
     const handelData = async () => {
         setLoading(true);
