@@ -12,28 +12,34 @@ export default function PopularBlog({ data }) {
         });
     };
     return (
-        <div className=" px-10  w-full border-primary-custom border-[2px] flex flex-col gap-4 bg-white">
+        <div className=" px-10 pb-5 w-full border-primary-custom border-[2px] flex flex-col gap-4 bg-white">
             <p className="bg-primary-custom w-full text-center font-medium text-2xl text-white p-2 font-roboto">
                 Popular Posts
             </p>
             {data.map((item, index) => (
                 <div
                     key={index}
-                    className="p-5 flex flex-row gap-6 lg:gap-2 justify-center items-center"
+                    className="py-3 flex flex-row gap-6 lg:gap-2 justify-center items-center"
                 >
                     <img
                         src={`/storage/images/blog/${item.image}`}
                         alt=""
-                        className="w-[45%]"
+                        className="w-[55%]"
                     />
-                    <div className="flex flex-col gap-1 w-[10rem]">
+                    <div className="flex flex-col gap-1 w-[18rem]">
+                        <p className="text-xs font-semibold font-roboto">
+                            {moment(item?.created_at).fromNow()}
+                        </p>
                         <p className="font-roboto text-xl font-medium paragraph-popular">
                             {item.title}
                         </p>
-                        <p className="font-roboto text-md font-semibold text-green-custom">
+                        <p className="font-roboto text-md font-semibold text-primary-custom">
                             {item.category_post.name} | Property
                         </p>
-                        <div className="w-[50%] flex gap-5">
+                        <div className="w-full flex">
+                            <p className="font-roboto text-md font-semibold text-primary-custom paragraph-popular w-[6.5rem]">
+                                by {item.user_post.name}
+                            </p>
                             <div className="flex flex-row gap-2 text-xs items-center">
                                 <svg
                                     width="21"
@@ -66,69 +72,10 @@ export default function PopularBlog({ data }) {
                                         : item.views / 1000 + "k"}
                                 </p>
                             </div>
-                            <div className="flex flex-row gap-2 text-xs items-center">
-                                <svg
-                                    width="20"
-                                    height="22"
-                                    viewBox="0 0 20 22"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <g>
-                                        <path
-                                            d="M17.2431 5.44697H15.6086V13.6174H4.98414V15.433C4.98414 15.9323 5.35191 16.3409 5.8014 16.3409H14.7913L18.0603 19.9722V6.3548C18.0603 5.85549 17.6926 5.44697 17.2431 5.44697ZM13.974 10.8939V2.7235C13.974 2.22419 13.6063 1.81567 13.1568 1.81567H2.53235C2.08286 1.81567 1.71509 2.22419 1.71509 2.7235V15.433L4.98414 11.8017H13.1568C13.6063 11.8017 13.974 11.3932 13.974 10.8939Z"
-                                            fill="#0D7377"
-                                        />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_120_119">
-                                            <rect
-                                                x="0.0805664"
-                                                y="3.05176e-05"
-                                                width="19.6143"
-                                                height="21.7878"
-                                                fill="white"
-                                            />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                                <p className="text-xs font-semibold font-roboto">
-                                    {item.comments
-                                        ? item.comments.length < 1000
-                                            ? item.comments.length
-                                            : item.comments.length / 1000 + "k"
-                                        : 0}
-                                </p>
-                            </div>
-                        </div>{" "}
-                        <div className="flex flex-row gap-2 items-center pl-1">
-                            <svg
-                                width="13"
-                                height="13"
-                                viewBox="0 0 13 13"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g>
-                                    <path
-                                        d="M6.5 0C2.90977 0 0 2.90977 0 6.5C0 10.0902 2.90977 13 6.5 13C10.0902 13 13 10.0902 13 6.5C13 2.90977 10.0902 0 6.5 0ZM6.5 11.9158C3.50898 11.9158 1.08418 9.49102 1.08418 6.5C1.08418 3.50898 3.50898 1.08418 6.5 1.08418C9.49102 1.08418 11.9158 3.50898 11.9158 6.5C11.9158 9.49102 9.49102 11.9158 6.5 11.9158ZM7.04082 2.16582H5.95664V6.5L8.39414 8.9375L9.20664 8.125L7.04082 5.95918V2.16582Z"
-                                        fill="#0D7377"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_191_148">
-                                        <rect
-                                            width="13"
-                                            height="13"
-                                            fill="white"
-                                        />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <p className="text-xs font-semibold font-roboto">
-                                {moment(item?.created_at).fromNow()}
-                            </p>
                         </div>
+                        <p className="font-roboto text-md font-semibold  paragraph-popular">
+                            {item.body}
+                        </p>
                     </div>
                 </div>
             ))}

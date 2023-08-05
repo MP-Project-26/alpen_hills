@@ -34,6 +34,8 @@ Route::get('/blog', [PostController::class, 'blog'])->name('blog');
 Route::post('/blog/search', [PostController::class, 'search'])->name('search');
 
 Route::get('/blog/spesifik/{id}', [PostController::class, 'blogSpesifik'])->name('blog');
+Route::post('/blog/comment/{id}', [PostController::class, 'addComments'])->name('comments');
+Route::put('/blog/view/{id}', [PostController::class, 'addViews'])->name('view');
 
 Route::get('/about', function () {
     return Inertia::render('About');

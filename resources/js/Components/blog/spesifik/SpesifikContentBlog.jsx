@@ -8,7 +8,7 @@ import parse from "html-react-parser";
 export default function SpesifikContentBlog({ dataContent: item }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
-        note: "",
+        comment: "",
         createdAt: Date.now(),
     });
     const textAreaRef = useRef(null);
@@ -18,36 +18,34 @@ export default function SpesifikContentBlog({ dataContent: item }) {
         textAreaRef.current.style.height =
             textAreaRef.current.scrollHeight + "px";
     };
-    // console.log(item);
     useEffect(() => {
         resizeTextArea();
-    }, [data.note]);
+    }, [data.comment]);
 
     const onChange = (e) => {
-        setData("note", e.target.value);
+        setData("comment", e.target.value);
     };
 
-    // const SumbitComment = async (e) => {
-    //     e.preventDefault();
-    //     const response = await axios.put(
-    //         `/blog/comment/${item.id}`,
-    //         {
-    //             id: data.id ? data.id + 1 : 1,
-    //             name: data.name,
-    //             note: data.note,
-    //             createdAt: data.createdAt,
-    //         },
-    //         {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //         }
-    //     );
-
-    //     if (response.status) {
-    //         window.location.reload();
-    //     }
-    // };
+    const SumbitComment = async (e) => {
+        e.preventDefault();
+        const response = await axios.post(
+            `/blog/comment/${item.id}`,
+            {
+                // id: data.id ? data.id + 1 : 1,
+                name: data.name,
+                email: data?.email,
+                comment: data.comment,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        if (response.status) {
+            window.location.reload();
+        }
+    };
     return (
         <div className="px-5 w-full lg:w-[65%] flex flex-col gap-[5rem]">
             <div className=" space-y-7">
@@ -158,7 +156,7 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                             New Comments
                         </h1>
                         <form
-                            // onSubmit={SumbitComment}
+                            onSubmit={SumbitComment}
                             className="m-4 lg:mx-[4rem] lg:my-[4rem] flex flex-col gap-[1rem]"
                         >
                             <div className="flex flex-col gap-2">
@@ -166,6 +164,7 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                                     Name <span className="text-red-500">*</span>
                                 </p>
                                 <input
+                                    required
                                     value={data.name}
                                     onChange={(e) =>
                                         setData("name", e.target.value)
@@ -175,13 +174,25 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                                 />
                             </div>
                             <div className="flex flex-col gap-2">
+                                <p className="font-semibold">Email</p>
+                                <input
+                                    value={data.email}
+                                    onChange={(e) =>
+                                        setData("email", e.target.value)
+                                    }
+                                    type="email"
+                                    className="w-full bg-gray-200  appearance-none border-2 border-gray-200 rounded  py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-primary-custom"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
                                 <p className="font-semibold">
                                     Comment{" "}
                                     <span className="text-red-500">*</span>
                                 </p>
                                 <textarea
+                                    // required
                                     ref={textAreaRef}
-                                    value={data.note}
+                                    value={data.comment}
                                     onChange={onChange}
                                     rows={4}
                                     type="text"
@@ -189,8 +200,7 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                                 ></textarea>
                             </div>
                             <div className="flex justify-between">
-                                {/* buatkan display option anonymous */}
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 p-5">
                                     <input
                                         name="anonymous"
                                         id="anonymous"
@@ -204,10 +214,9 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                                         Display as Anonymous ( Optional )
                                     </label>
                                 </div>
-
                                 <button
                                     type="sumbit"
-                                    className="h-12 w-24 cursor-pointer rounded-tl-none text-white bg-primary-custom font-roboto font-medium"
+                                    className=" px-4 py-2 cursor-pointer text-white bg-primary-custom font-roboto font-medium"
                                 >
                                     Submit
                                 </button>
@@ -219,18 +228,3 @@ export default function SpesifikContentBlog({ dataContent: item }) {
         </div>
     );
 }
-
-const dataComments = [
-    {
-        id: 1,
-        name: "Unsername1",
-        createdAt: 1688674447907,
-        note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam doloribus tenetur ipsa? Sunt sit exercitationem aliquam excepturi molestias, provident placeat non vitae nemo dicta possimus neque, similique soluta culpa velit.",
-    },
-    {
-        id: 2,
-        name: "Unsername2",
-        createdAt: 1688674447907,
-        note: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam doloribus tenetur ipsa? Sunt sit exercitationem aliquam excepturi molestias, provident placeat non vitae nemo dicta possimus neque, similique soluta culpa velit.",
-    },
-];

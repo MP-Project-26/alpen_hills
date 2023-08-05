@@ -40,7 +40,6 @@ class PostController extends Controller
         ]);
     }
 
-    // buatkan function search untuk mencari data berdasarkan judul kategori dan body
     public function search(Request $request)
     {
         $search = $request->search;
@@ -56,9 +55,59 @@ class PostController extends Controller
         $post = new PostsCollection($postQuery->get());
         return response()->json([
             'message' => 'Data berhasil ditemukan',
-            'data' => $post
+            'data' => $post,
+            'status' => true
         ]);
     }
+
+    public function addViews($id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+        $post->update([
+            'views' => $post->views + 1
+        ]);
+        return response()->json([
+            'message' => 'Data berhasil ditemukan',
+            'status' => true
+        ]);
+    }
+
+    public function addComments(Request $request, $id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+        if ($request->email) {
+            $post->comments()->create([
+                'post_id' => $id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'comment' => $request->comment
+            ]);
+        } else {
+            $post->comments()->create([
+                'post_id' => $id,
+                'name' => $request->name,
+                'email' => 'anonymous@gmail.com',
+                'comment' => $request->comment
+            ]);
+        }
+        return response()->json([
+            'message' => 'Data berhasil ditambahkan',
+            'status' => true
+        ]);
+    }
+
 
     public function indexByAdmin($slug = null)
     {

@@ -20,13 +20,13 @@ export default function ContentBlog({
     const [pageCount, setPageCount] = useState(0);
     const [Loading, setLoading] = useState(false);
 
-    // const addViewCount = async (dataView) => {
-    //     await axios.put(`/blog/view/${dataView.id}`, dataView, {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     });
-    // };
+    const addViewCount = async (dataView) => {
+        await axios.put(`/blog/view/${dataView.id}`, dataView, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    };
 
     useEffect(() => {
         setLoading(true);
@@ -78,6 +78,9 @@ export default function ContentBlog({
                                             </p>
                                         </div>
                                         <Link
+                                            onClick={() => {
+                                                addViewCount(item);
+                                            }}
                                             href={`/blog/spesifik/${item.id}`}
                                             className=" bg-white flex justify-center items-center cursor-pointer"
                                         >
