@@ -6,7 +6,7 @@ use App\Models\SpefisikasiProperty;
 use App\Http\Requests\StoreSpefisikasiPropertyRequest;
 use App\Http\Requests\UpdateSpefisikasiPropertyRequest;
 
-class SpefisikasiPropertyController extends Controller
+class SpesifikasiPropertyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,6 +30,7 @@ class SpefisikasiPropertyController extends Controller
     public function store(StoreSpefisikasiPropertyRequest $request)
     {
         //
+        $spefisikasiProperty = SpefisikasiProperty::create($request->validated()) ? back()->with('message', 'Spesifikasi Property Berhasil Ditambahkan !') : back()->with('error', 'Spesifikasi Property Gagal Ditambahkan !');
     }
 
     /**
@@ -51,16 +52,19 @@ class SpefisikasiPropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSpefisikasiPropertyRequest $request, SpefisikasiProperty $spefisikasiProperty)
+    public function update(UpdateSpefisikasiPropertyRequest $request, $id)
     {
-        //
+        $spefisikasiProperty = SpefisikasiProperty::find($id);
+        $spefisikasiProperty->update($request->validated()) ? back()->with('message', 'Spesifikasi Property Berhasil Diubah !') : back()->with('error', 'Spesifikasi Property Gagal Diubah !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SpefisikasiProperty $spefisikasiProperty)
+    public function destroy($id)
     {
         //
+        $spefisikasiProperty = SpefisikasiProperty::find($id);
+        $spefisikasiProperty->delete() ? back()->with('message', 'Spesifikasi Property Berhasil Dihapus !') : back()->with('error', 'Spesifikasi Property Gagal Dihapus !');
     }
 }

@@ -33,8 +33,8 @@ const Sidebar = ({ isSidebarOpen, auth }) => {
                                     <li
                                         className={`font-medium w-full rounded-md text-gray-700 p-2 flex gap-2 items-center ${
                                             menu === activeMenu
-                                                ? "text-black bg-slate-200"
-                                                : "hover:text-black hover:bg-slate-200"
+                                                ? "text-gray-900  bg-blue-gray-200"
+                                                : "hover:text-black hover:bg-blue-gray-200"
                                         }`}
                                     >
                                         <i
@@ -48,7 +48,7 @@ const Sidebar = ({ isSidebarOpen, auth }) => {
 
                         {auth.user?.role === 1 ? (
                             <Link href="/admin/user" className="cursor-pointer">
-                                <li className="font-medium w-full rounded-md text-gray-700 p-2 flex gap-2 items-center hover:text-black hover:bg-slate-200">
+                                <li className="font-medium w-full rounded-md text-gray-700 p-2 flex gap-2 items-center hover:text-gray-900 hover:bg-gray-200">
                                     <i className="text-xl fas fa-users"></i>
                                     User Management
                                 </li>

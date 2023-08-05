@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipe_properties', function (Blueprint $table) {
+        Schema::create('fasilitas_properties', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->string('price');
+            $table->foreignId('tipe_property_id');
+            $table->string('attribute');
+            $table->string('value');
+            $table->string('icon');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipe_properties');
+        Schema::dropIfExists('fasilitas_properties');
     }
 };
