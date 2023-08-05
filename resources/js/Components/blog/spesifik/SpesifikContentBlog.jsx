@@ -153,7 +153,7 @@ export default function SpesifikContentBlog({ dataContent: item }) {
                 <div className="contack  pt-20 px-5">
                     <div className="bg-white relative w-[20rem] lg:w-full justify-center flex flex-col border-[.2rem] border-primary-custom">
                         <h1 className=" absolute -top-5 lg:-top-9 left-16 p-2 bg-white font-semibold text-xl lg:text-5xl text-primary-custom">
-                            New Comments <i class="fas fa-yin-yang"></i>
+                            New Comments 
                         </h1>
                         <form
                             onSubmit={SumbitComment}
