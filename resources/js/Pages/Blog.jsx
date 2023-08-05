@@ -53,7 +53,7 @@ export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
         );
 
         setItemOffset(0);
-        setData(response.data.data);
+        setData(response.data.data.data);
         setLoading(false);
     };
     return (

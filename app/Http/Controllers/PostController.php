@@ -40,6 +40,26 @@ class PostController extends Controller
         ]);
     }
 
+    // buatkan function search untuk mencari data berdasarkan judul kategori dan body
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->where('title', 'LIKE', '%' . $search . '%')
+            ->orWhereHas(
+                'categoryPost',
+                function ($q) use ($search) {
+                    $q->where('name', 'LIKE', '%' . $search . '%');
+                }
+            )
+            ->orWhere('body', 'LIKE', '%' . $search . '%')
+            ->latest();
+        $post = new PostsCollection($postQuery->get());
+        return response()->json([
+            'message' => 'Data berhasil ditemukan',
+            'data' => $post
+        ]);
+    }
+
     public function indexByAdmin($slug = null)
     {
         $search = request()->query('search');
