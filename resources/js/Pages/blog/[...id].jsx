@@ -1,12 +1,11 @@
-import React from "react";
+import SpesifikContentBlog from "@/Components/blog/spesifik/SpesifikContentBlog";
 import GuestLayout from "@/Layouts/GuestLayout";
-
+import moment from "moment/moment";
+import parse from "html-react-parser";
+import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
-import ContentBlog from "@/Components/blog/ContentBlog";
 import PopularBlog from "@/Components/blog/PopularBlog";
-
 
 const dataBlog = [
     {
@@ -91,97 +90,52 @@ const allDataBlog = [
         views: 2,
     },
 ];
-
-
-export default function Blog() {
-     const [data, setData] = useState([]);
-     const [pupular, setPupular] = useState([]);
-     const [search, setSearch] = useState("");
-     const [loading, setLoading] = useState(false);
-     const [itemOffset, setItemOffset] = useState(0);
-
-     useEffect(() => {
-         const dataPopularBlog = [...allDataBlog].sort(
-             (a, b) => b.views - a.views
-         );
-         setPupular(dataPopularBlog.slice(0, 3));
-     }, [dataBlog]);
-
-     const handelData = async () => {
-         setLoading(true);
-         setData(dataBlog);
-         setLoading(false);
-     };
-
-     useEffect(() => {
-         if (!search) {
-             handelData();
-         }
-     }, [loading]);
-
-     const onSearch = async (e) => {
-         e.preventDefault();
-
-         setLoading(true);
-         const response = await axios.post(
-             `/blog/search`,
-             {
-                 search: search,
-             },
-             {
-                 headers: {
-                     "Content-Type": "application/json",
-                 },
-             }
-         );
-
-         setItemOffset(0);
-         setData(response.data.data);
-         setLoading(false);
-     };
+export default function Spesifik() {
+    const [pupular, setPupular] = useState([]);
+    useEffect(() => {
+        const dataPopularBlog = [...allDataBlog].sort(
+            (a, b) => b.views - a.views
+        );
+        setPupular(dataPopularBlog.slice(0, 3));
+    }, [allDataBlog]);
     return (
-        <GuestLayout title="Blog">
+        <GuestLayout title="Spesifik">
             <div className="w-full py-[10rem] px-0 lg:px-[6rem] bg-white">
-                <div className="flex flex-col items-center justify-center gap-8">
-                    <div className="text-6xl font-extrabold flex flex-col items-center gap-6 mb-6">
-                        <div>
-                            <span className="text-primary-custom">OUR</span> BLOG
-                        </div>
-                    </div>
-                    <div className="flex flex-col lg:flex-row   w-full  justify-between gap-[5rem] columns-2">
-                        <ContentBlog
-                            data={data}
-                            setItemOffset={setItemOffset}
-                            itemOffset={itemOffset}
-                        />
-
-                        {/* kanan */}
-                        <div className="px-5 flex flex-col gap-10 w-full lg:w-[35%] sticky top-0 ">
-                            <div className=" border-green-custom border-[2px] rounded-2xl flex flex-row p-5 gap-4 bg-white shadow-xl">
-                                <input
-                                    className="w-full px-4 py-2 rounded-xl"
-                                    type="text"
-                                    name="search"
-                                    id="search"
-                                    placeholder="search"
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                />{" "}
-                                <button
-                                    onClick={onSearch}
-                                    type="sumbit"
-                                    className=" rounded-xl bg-green-custom flex justify-center items-center px-5 text-white"
-                                >
-                                    Search
-                                </button>
+                <div className="flex flex-col xl:flex-row w-full justify-between gap-[5rem] columns-2">
+                    <SpesifikContentBlog dataContent={dataBlog[0]} />
+                    {/* <div className="px-5 w-full lg:w-[65%] flex flex-col gap-[5rem]">
+                        <div className=" space-y-7">
+                            <span className="text-3xl lg:text-6xl font-semibold text-green-custom">
+                                {dataBlog[0].title}
+                            </span>
+                            <p className="text-md lg:text-xl font-semibold ">
+                                {moment(dataBlog[0]?.created_at).format(
+                                    "DD MMMM YYYY"
+                                )}
+                                - {dataBlog[0].author} - {"Property"}
+                            </p>
+                            <img
+                                src={dataBlog[0].image}
+                                alt=""
+                                className="w-[90%] lg:w-full"
+                                data-aos="fade-right"
+                            />
+                            <div
+                                className="pl-8 text-lg text-justify text-black font-roboto font-medium max-w-full"
+                                data-aos="fade-up"
+                                data-aos-anchor-placement="top-bottom"
+                            >
+                                {parse(dataBlog[0].content)}
                             </div>
-                            {/* Popular Posts */}
-                            <PopularBlog data={pupular} />
                         </div>
+                    </div> */}
+                    {/* kanan */}
+                    <div className="px-5 flex flex-col gap-10 w-full xl:w-[35%] sticky top-0 pt-36">
+                        {/* Popular Posts */}
+                        <PopularBlog data={pupular} />
                     </div>
                 </div>
             </div>
         </GuestLayout>
     );
 }
-
