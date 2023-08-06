@@ -5,12 +5,12 @@ export default function Footer() {
     const pesanWa = `Halo Stellar, Saya ingin bertanya terkait produk dan layanan yang ada di Stellar. \n
     from : https://stellarjardinresidence.com/`;
     return (
-        <footer className="footer px-0 md:px-[10rem] py-[5rem] bg-green-custom text-neutral-content flex flex-col gap-5  ">
+        <footer className="footer px-0 md:px-[10rem] py-[5rem] bg-primary-custom text-neutral-content flex flex-col gap-5  ">
             <div className="flex flex-col lg:flex-row w-full justify-center">
                 <img
-                    src={"/storage/assets/img/footer_stellar.png"}
+                    src={"/storage/images/content/Logo_Alpen.png"}
                     alt="Logo"
-                    className="w-[17rem] lg:w-[20rem]  cursor-pointer m-0 lg:-mt-[5rem] lg:-ml-[5rem]"
+                    className="w-[17rem] lg:w-[20rem]  cursor-pointer m-0  lg:-ml-[5rem] object-contain "
                 />
                 <div className=" w-full lg:w-[70%] flex flex-col gap-5 lg:gap-0 lg:flex-row justify-evenly p-7 lg:p-0">
                     <div className="flex flex-col gap-2 w-[10rem] ">
@@ -124,12 +124,19 @@ export default function Footer() {
                 <div className="w-full flex flex-row justify-between items-center pt-5">
                     <a
                         href="#"
-                        className="text-xs lg:text-lg text-gray-300 font-roboto text-center flex flex-row items-center  cursor-pointer"
+                        className="text-xs lg:text-lg text-gray-300 font-roboto text-center flex flex-row items-center justify-center cursor-pointer"
                     >
                         Powered by{" "}
-                        <img src="/storage/assets/img/mp-footer.png" alt="" />{" "}
+                        <img
+                            src="/storage/images/content/mp-footer.png"
+                            alt=""
+                        />{" "}
                         PROJECT
                     </a>
+                    <div className="flex gap-5">
+                        <a href="#">Privacy policy</a>
+                        <a href="#">Terms & Conditions</a>
+                    </div>
                 </div>
             </div>
         </footer>

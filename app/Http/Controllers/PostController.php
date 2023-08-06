@@ -16,10 +16,98 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function blog($slug = null)
     {
-        //
+        $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->latest();
+        $post = new PostsCollection($postQuery->get());
+
+        return Inertia::render('Blog', [
+            'title' => 'Blog',
+            'dataBlog' => $post,
+            'dataPopular' => $post,
+        ]);
     }
+    public function blogSpesifik($id)
+    {
+        $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->where('id', $id)->latest();
+        $postPopular = Post::with(['categoryPost', 'userPost', 'comments'])->latest();
+        $post = new PostsCollection($postQuery->get());
+        $popular = new PostsCollection($postPopular->get());
+        return Inertia::render('blog/[...id]', [
+            'title' => 'Blog Spesifik',
+            'dataContent' => $post,
+            'dataPopular' => $popular,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->where('title', 'LIKE', '%' . $search . '%')
+            ->orWhereHas(
+                'categoryPost',
+                function ($q) use ($search) {
+                    $q->where('name', 'LIKE', '%' . $search . '%');
+                }
+            )
+            ->orWhere('body', 'LIKE', '%' . $search . '%')
+            ->latest();
+        $post = new PostsCollection($postQuery->get());
+        return response()->json([
+            'message' => 'Data berhasil ditemukan',
+            'data' => $post,
+            'status' => true
+        ]);
+    }
+
+    public function addViews($id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+        $post->update([
+            'views' => $post->views + 1
+        ]);
+        return response()->json([
+            'message' => 'Data berhasil ditemukan',
+            'status' => true
+        ]);
+    }
+
+    public function addComments(Request $request, $id)
+    {
+        $post = Post::find($id);
+        if (!$post) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+        if ($request->email) {
+            $post->comments()->create([
+                'post_id' => $id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'comment' => $request->comment
+            ]);
+        } else {
+            $post->comments()->create([
+                'post_id' => $id,
+                'name' => $request->name,
+                'email' => 'anonymous@gmail.com',
+                'comment' => $request->comment
+            ]);
+        }
+        return response()->json([
+            'message' => 'Data berhasil ditambahkan',
+            'status' => true
+        ]);
+    }
+
 
     public function indexByAdmin($slug = null)
     {
@@ -44,7 +132,7 @@ class PostController extends Controller
             });
         }
 
-        $post = new PostsCollection($postQuery->paginate(10));
+        $post = new PostsCollection($postQuery->paginate(2));
         $categoryPost = CategoryPost::all();
 
 
@@ -138,8 +226,6 @@ class PostController extends Controller
         }
 
         $post->save() ? back()->with('message', 'Post Berhasil Diupdate.') : back()->with('error', 'Post Gagal Diupdate.');
-
-
     }
 
     /**
@@ -150,6 +236,5 @@ class PostController extends Controller
         //delete post imgae
         Storage::delete('public/images/blog/' . $post->image);
         $post->delete() ? back()->with('message', 'Post Berhasil Dihapus.') : back()->with('error', 'Post Gagal Dihapus.');
-
     }
 }

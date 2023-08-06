@@ -1,8 +1,11 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import React from "react";
 import { useEffect } from "react";
 
 export default function Navbar() {
+    const { tipeProperty } = usePage().props;
+    console.log(tipeProperty);
+
     const [open, setOpen] = React.useState(false);
 
     const location = window.location.pathname;
@@ -25,8 +28,8 @@ export default function Navbar() {
             className={`w-full ${
                 location === "/" && scroll <= 1.5
                     ? " bg-transparent text-white"
-                    : "bg-green-custom shadow-lg text-white"
-            } lg:px-[10rem] px-0 mt-0 sticky top-0 z-40 transition-all duration-180 ease-in-out `}
+                    : "bg-primary-custom shadow-lg text-white"
+            } lg:px-[10rem] px-0 mt-0 sticky top-0 z-50 transition-all duration-180 ease-in-out `}
         >
             <div className="navbar">
                 <div className="navbar-start">
@@ -99,11 +102,11 @@ export default function Navbar() {
                         </ul>
                     </div>
                     <Link href="/">
-                        {/* <img
-                            src="/assets/img/Logo.png"
+                        <img
+                            src="/storage/images/content/Logo_header.png"
                             alt="Logo"
-                            className="w-[4rem] lg:w-[6rem] cursor-pointer"
-                        /> */}
+                            className="w-[8rem] lg:w-[12rem] cursor-pointer"
+                        />
                     </Link>
                 </div>
                 <div className="navbar-end hidden lg:flex">
@@ -142,7 +145,7 @@ export default function Navbar() {
                                 >
                                     <li>
                                         <Link
-                                            href="/type/{section}"
+                                            href="/type"
                                             className=" font-semibold text-xl "
                                         >
                                             Standard

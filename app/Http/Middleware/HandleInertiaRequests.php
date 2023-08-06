@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\TipeProperty;
+use Closure;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -21,6 +23,16 @@ class HandleInertiaRequests extends Middleware
     public function version(Request $request): string|null
     {
         return parent::version($request);
+    }
+
+    public function handle($request , Closure $next )
+    {
+        //share data tipe property ke semua halaman
+        $tipeProperty = TipeProperty::all();
+        $request->session()->put('tipeProperty', $tipeProperty);
+        return $next($request);
+        
+
     }
 
     /**

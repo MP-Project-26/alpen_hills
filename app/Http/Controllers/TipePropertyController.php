@@ -11,6 +11,7 @@ class TipePropertyController extends Controller
 {
     public function store(Request $request)
     {
+        
         $request->validate(
             [
                 [
@@ -89,4 +90,3 @@ class TipePropertyController extends Controller
     }
 
 }
-    

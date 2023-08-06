@@ -2,6 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+@layer components {
+  .bg-gradient-custom {
+  background: rgb(244, 244, 244);
+background: linear-gradient(180deg, rgba(244, 244, 244, 0) 59%, rgba(22, 11, 171, 0.4962359943977591) 100%);
+  }
+
+  .bg-primary-custom {
+    @apply bg-[#213559];
+  }
+
+  .text-primary-custom {
+    @apply text-[#213559];
+  }
+
+  .border-primary-custom {
+    @apply border-[#213559];
+  }
+
+  .paragraph-spesifik-Blog {
+    /* text wrap width 32rem */
+    overflow          : hidden;
+    display           : -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+  .paragraph-Blog {
+    overflow          : hidden;
+    display           : -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+  .paragraph-table-Blog {
+    overflow          : hidden;
+    display           : -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+
+  .paragraph-popular {
+    overflow          : hidden;
+    display           : -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    /* @media (max-width: 768px) {
+            width: 40rem;
+        }
+
+        @media (max-width: 968px) {
+            width: 30rem;
+        } */
+  }
+
+
+  .scrollModal::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .scrollModal_type::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollModal_type::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .scrollModal_type::-webkit-scrollbar-thumb {
+    background   : #0D7377;
+    border-radius: 10px;
+  }
+}
+
+
+
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -12,12 +93,19 @@
   }
 }
 
-.animate-fadeIn {
-  animation-name: fadeIn;
+/* button value aria-label="Insert File" hidden */
+button[aria-label="Insert file"],
+button[aria-label="Insert Image"],
+button[aria-label="Insert youtube/vimeo video"] {
+  display: none;
 }
 
-@layer components {
-  .bg-prymary {
-    @apply bg-[#213559];
-  }
+.jodit-status-bar__item-right {
+  display: none;
+}
+
+
+
+.animate-fadeIn {
+  animation-name: fadeIn;
 }

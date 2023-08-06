@@ -1,10 +1,16 @@
-import Layout from '@/Layouts/Layout'
-import React from 'react'
+import GuestLayout from "@/Layouts/GuestLayout";
+import React from "react";
+import AboutUs from "@/Components/home/About";
+import Carousel from "@/Components/home/Carousal";
 
-export default function Home() {
-  return (
-    <Layout title="Home">
-        <h1>Home</h1>
-    </Layout>
-  )
-}
+const Home = ({ ...props }) => {
+    
+    return (
+        <GuestLayout title={props.title}>
+            <Carousel />
+            <AboutUs />
+        </GuestLayout>
+    );
+};
+
+export default Home;

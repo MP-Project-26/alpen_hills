@@ -46,10 +46,10 @@ const Header = ({ auth, toggleSidebar, isSidebarOpen }) => {
         className="w-auto flex h-full justify-end items-center gap-2 relative"
         onClick={toggleDropdown}
       >
-        <h1>
+        {/* <h1>
           Welcome,{" "}
           <span className="font-semibold">{auth.user.name}</span>
-        </h1>
+        </h1> */}
         <i
           className="bi bi-person-circle md:text-4xl text-2xl cursor-pointer"
           onClick={toggleDropdown}
@@ -58,14 +58,14 @@ const Header = ({ auth, toggleSidebar, isSidebarOpen }) => {
         {/* Menu Dropdown */}
         {isDropdownOpen && (
           <ul className="absolute top-10 right-0 bg-white p-2 shadow">
-            <li>
+            {/* <li>
               <Link
                 href={`/admin/profile/${auth.user.id}`}
                 className="text-gray-800 hover:bg-gray-200 block px-4 py-2 rounded"
               >
                 Profile
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 method="post"

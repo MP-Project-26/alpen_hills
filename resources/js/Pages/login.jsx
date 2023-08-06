@@ -2,24 +2,22 @@ import InputError from "@/Components/Form/InputError";
 import { Head, useForm, Link } from "@inertiajs/react";
 import React, { useEffect } from "react";
 
-
 const login = ({ title, status }) => {
-
     const { data, setData, post, errors, reset } = useForm({
-        email: '',
-        password: '',
+        email: "",
+        password: "",
         remember: false,
     });
 
     useEffect(() => {
         return () => {
-            reset('password');
+            reset("password");
         };
     }, []);
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('login.store'));
+        post(route("login.store"));
     };
 
     return (
@@ -28,8 +26,12 @@ const login = ({ title, status }) => {
 
             <div className="flex h-screen w-screen justify-center items-center md:px-0 px-3 bg-slate-200">
                 <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg  sm:p-6 md:p-8 shadow-lg">
-                {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-                    <form className="space-y-6" onSubmit={submit} >
+                    {status && (
+                        <div className="mb-4 font-medium text-sm text-green-600">
+                            {status}
+                        </div>
+                    )}
+                    <form className="space-y-6" onSubmit={submit}>
                         <h5 className="text-xl font-medium text-gray-900 w-full text-center">
                             Login
                         </h5>
@@ -44,7 +46,9 @@ const login = ({ title, status }) => {
                                 required
                                 autoComplete="off"
                                 value={data.email}
-                                onChange={(e) => setData('email', e.target.value)}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
                             />
                             <label
                                 htmlFor="email"
@@ -53,7 +57,10 @@ const login = ({ title, status }) => {
                                 Your email
                             </label>
 
-                            <InputError message={errors.email} className="mt-1" />
+                            <InputError
+                                message={errors.email}
+                                className="mt-1"
+                            />
                         </div>
                         <div className="relative">
                             <input
@@ -65,7 +72,9 @@ const login = ({ title, status }) => {
                                 required
                                 autoComplete="off"
                                 value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
                             />
                             <label
                                 htmlFor="password"
@@ -73,7 +82,10 @@ const login = ({ title, status }) => {
                             >
                                 Your password
                             </label>
-                            <InputError message={errors.password} className="mt-1" />
+                            <InputError
+                                message={errors.password}
+                                className="mt-1"
+                            />
                         </div>
 
                         <div className="flex items-start">
@@ -83,9 +95,10 @@ const login = ({ title, status }) => {
                                     type="checkbox"
                                     value=""
                                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-
                                     checked={data.remember}
-                                    onChange={(e) => setData('remember', e.target.checked)}
+                                    onChange={(e) =>
+                                        setData("remember", e.target.checked)
+                                    }
                                 />
                             </div>
                             <label

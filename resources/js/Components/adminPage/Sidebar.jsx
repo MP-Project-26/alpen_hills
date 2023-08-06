@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 const Sidebar = ({ isSidebarOpen, auth }) => {
     const [activeMenu, setActiveMenu] = useState(null);
 
+    console.log(auth)
+
     useEffect(() => {
         const active = MenuDashboard.find((menu) =>
             window.location.pathname.startsWith(menu.url)
@@ -46,7 +48,7 @@ const Sidebar = ({ isSidebarOpen, auth }) => {
                             ))}
                         <hr />
 
-                        {auth.user?.role === 1 ? (
+                        {/* {auth.user?.role === 1 ? (
                             <Link href="/admin/user" className="cursor-pointer">
                                 <li className="font-medium w-full rounded-md text-gray-700 p-2 flex gap-2 items-center hover:text-gray-900 hover:bg-gray-200">
                                     <i className="text-xl fas fa-users"></i>
@@ -55,7 +57,7 @@ const Sidebar = ({ isSidebarOpen, auth }) => {
                             </Link>
                         ) : (
                             ""
-                        )}
+                        )} */}
                     </ul>
                 </div>
             </div>

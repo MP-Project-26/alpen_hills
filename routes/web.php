@@ -30,8 +30,21 @@ Route::middleware('guest')->prefix('admin')->group(function () {
     Route::post('/login', [AuthController::class, 'store'])->name('login.store');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::middleware('web') -> group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
+    Route::get('/blog', [PostController::class, 'blog'])->name('blog');
+    Route::post('/blog/search', [PostController::class, 'search'])->name('search');
+
+    Route::get('/blog/spesifik/{id}', [PostController::class, 'blogSpesifik'])->name('blog');
+    Route::post('/blog/comment/{id}', [PostController::class, 'addComments'])->name('comments');
+    Route::put('/blog/view/{id}', [PostController::class, 'addViews'])->name('view');
+
+    Route::get('/about', function () {
+        return Inertia::render('About');
+    })->name('about');
+
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -74,12 +87,6 @@ Route::middleware('auth')->group(function () {
 
     //Comments Management
     Route::delete('/admin/comment/delete/{comment}', [CommentController::class, 'destroy'])->name('commentsAdmin.destroy');
-
-    //Spesifikasi Management
-    Route::resource('spesifikasi', SpesifikasiPropertyController::class);
-    Route::resource('fasilitas', FasilitasPropertyController::class);
-
-
 });
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->name('userAdmin.index')->middleware('super_admin');
@@ -87,5 +94,3 @@ Route::post('/admin/user/add', [AdminUserController::class, 'store'])->name('use
 Route::get('admin/user/role/{id}', [AdminUserController::class, 'role'])->name('userAdmin.role')->middleware('super_admin');
 Route::delete('/admin/user/delete/{user}', [AdminUserController::class, 'destroy'])->name('userAdmin.destroy')->middleware('super_admin');
 Route::post('/admin/user/update/{id}', [AdminUserController::class, 'update'])->name('userAdmin.update')->middleware('super_admin');
-
-
