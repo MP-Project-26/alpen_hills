@@ -185,27 +185,29 @@ export default function ContentBlog({
                         </div>
                     </div>
                 ))}
-                <ReactPaginate
-                    className="flex flex-row gap-1 w-full justify-center items-center select-none"
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={2}
-                    marginPagesDisplayed={1}
-                    pageCount={pageCount}
-                    previousLabel="< prev"
-                    pageClassName=" text-xl bg-primary-custom p-2 rounded-md text-white"
-                    pageLinkClassName=" rounded-md text-white  px-4 py-2 font-semibold font-roboto"
-                    previousClassName="bg-primary-custom p-2 rounded-md text-white"
-                    previousLinkClassName="text-xl p-2 bg-primary-customfont-semibold font-roboto"
-                    nextClassName="bg-primary-custom p-2 rounded-md text-white"
-                    nextLinkClassName="text-xl p-2  font-semibold font-roboto"
-                    breakLabel="..."
-                    breakClassName="bg-primary-custom p-2 rounded-md text-white"
-                    breakLinkClassName="text-xl font-semibold font-roboto"
-                    containerClassName="pagination"
-                    activeClassName="bg-teal-500"
-                    renderOnZeroPageCount={null}
-                />
+                <div className="flex justify-normal items-center">
+                    <ReactPaginate
+                        className="flex flex-row gap-1 w-full justify-center items-center select-none"
+                        nextLabel="next >"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={2}
+                        marginPagesDisplayed={1}
+                        pageCount={pageCount}
+                        previousLabel="< prev"
+                        pageClassName=" text-xl bg-primary-custom p-2 rounded-md text-white"
+                        pageLinkClassName=" rounded-md text-white  px-4 py-2 font-semibold font-roboto"
+                        previousClassName="bg-primary-custom p-2 rounded-md text-white"
+                        previousLinkClassName="text-xl p-2 bg-primary-customfont-semibold font-roboto"
+                        nextClassName="bg-primary-custom p-2 rounded-md text-white"
+                        nextLinkClassName="text-xl p-2  font-semibold font-roboto"
+                        breakLabel="..."
+                        breakClassName="bg-primary-custom p-2 rounded-md text-white"
+                        breakLinkClassName="text-xl font-semibold font-roboto"
+                        containerClassName="pagination"
+                        activeClassName="bg-teal-500"
+                        renderOnZeroPageCount={null}
+                    />
+                </div>
             </div>
         </>
     );
