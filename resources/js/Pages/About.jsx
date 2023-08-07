@@ -20,12 +20,12 @@ export default function About() {
                         <div className="relative">
                             <div className="flex w-full justify-center mt-0 lg:mt-20">
                                 <img
-                                    className="object-cover w-[90%] "
+                                    className="w-[90%] "
                                     src="/storage/images/content/about/slide1_layer1.png"
                                     alt=""
                                 />
                             </div>
-                            <div className="flex w-full justify-center lg:top-[10%] lg:left-[20%] -top-[175px] left-[20%] absolute md:items-center py-8 pl-12 lg:items-center lg:pl-20 md:pl-16">
+                            <div className="flex w-full justify-center lg:top-[5%] lg:left-[20%] -top-[185px] left-[20%] absolute md:items-center py-8 pl-12 lg:items-center lg:pl-20 md:pl-16">
                                 <img
                                     className=" w-[50%] mt-[18rem]"
                                     src="/storage/images/content/about/layer_1.png"

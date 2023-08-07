@@ -4,26 +4,28 @@ import { Link } from "@inertiajs/react";
 
 const AboutUs = () => {
     return (
-        <div className="py-32 flex flex-col lg:flex-row md:flex-row w-full h-full bg-white justify-center mt-20 mb-10 md:px-6 lg:px-32 lg:gap-20 md:gap-10 px-4 ">
+        <div className="py-0 lg:py-32 flex flex-col lg:flex-row md:flex-row w-full h-full bg-white justify-center mt-5 md:mt-20 mb-10 md:px-6 lg:px-32 lg:gap-20 md:gap-10 px-4 ">
             {/* Image */}
             <div
-                className="flex flex-col h-auto relative justify-center md:w-[50%] lg:w-[50%]"
+                className="flex flex-col h-auto  justify-center w-full md:w-[50%] lg:w-[50%]"
                 data-aos="zoom-in-down"
             >
-                <div className="w-full h-full flex justify-center items-center px-6 pl-10">
-                    <img
-                        className="w-full"
-                        src="/storage/images/content/about/bg.png"
-                        alt=""
-                    />
-                </div>
-
-                <div className="flex w-full justify-center h-full -top-[30%] -left-[8%] md:-top-[16%] md:-left-[12%] lg:-top-[22%] lg:-left-[10%] absolute md:items-center py-8 pl-12 lg:items-center lg:pl-20 md:pl-16">
-                    <img
-                        className="object-cover w-full h-[17rem] lg:h-[20rem] md:h-[14rem]"
-                        src="/storage/images/content/about/about_1.png"
-                        alt=""
-                    />
+                <div className="relative lg:mt-20 mt-0">
+                    {" "}
+                    <div className="w-full h-full  justify-center items-center px-6 pl-10 flex ">
+                        <img
+                            className="w-[90%] lg:flex hidden"
+                            src="/storage/images/content/about/bg.png"
+                            alt=""
+                        />
+                    </div>
+                    <div className=" flex w-full justify-start lg:justify-center h-full -top-[40%] -left-[10%] relative md:absolute md:items-center lg:py-8 pl-12 lg:items-center lg:pl-20 md:pl-16">
+                        <img
+                            className="px-5 lg:px-0 w-[80%] lg:w-[90%]"
+                            src="/storage/images/content/about/about_1.png"
+                            alt=""
+                        />
+                    </div>
                 </div>
             </div>
             {/* Text */}

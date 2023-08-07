@@ -6,8 +6,6 @@ import { useState } from "react";
 import axios from "axios";
 import ContentBlog from "@/Components/blog/ContentBlog";
 import PopularBlog from "@/Components/blog/PopularBlog";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import RecentPost from "@/Components/blog/RecentPost";
 
 export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
@@ -70,7 +68,7 @@ export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
             <div className="w-full py-[10rem] px-0 lg:px-[6rem] bg-white">
                 <div className="flex flex-col items-center justify-center gap-8">
                     <div className="text-6xl font-extrabold flex flex-col items-center gap-6 -mt-5 mb-4">
-                        <div>
+                        <div className="text-gray-700">
                             <span className="text-primary-custom">OUR</span>{" "}
                             BLOG
                         </div>
@@ -99,7 +97,7 @@ export default function Blog({ dataBlog: datas, dataPopular: allDataBlog }) {
                                     type="sumbit"
                                     className=" bg-primary-custom flex justify-center items-center px-5 text-white"
                                 >
-                                    <FontAwesomeIcon icon={faSearch} />
+                                    <i class="fas fa-search"></i>
                                 </button>
                             </div>
                             {/* Popular Posts */}

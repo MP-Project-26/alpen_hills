@@ -7,8 +7,8 @@
 
 @layer components {
   .bg-gradient-custom {
-  background: rgb(244, 244, 244);
-background: linear-gradient(180deg, rgba(244, 244, 244, 0) 59%, rgba(22, 11, 171, 0.4962359943977591) 100%); 
+    background: rgb(244, 244, 244);
+    background: linear-gradient(180deg, rgba(244, 244, 244, 0) 59%, rgba(22, 11, 171, 0.4962359943977591) 100%);
   }
 
   .bg-primary-custom {
@@ -31,6 +31,12 @@ background: linear-gradient(180deg, rgba(244, 244, 244, 0) 59%, rgba(22, 11, 171
     -webkit-box-orient: vertical;
   }
 
+  .paragraph-title {
+    overflow          : hidden;
+    display           : -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
   .paragraph-Blog {
     overflow          : hidden;
     display           : -webkit-box;
@@ -39,6 +45,12 @@ background: linear-gradient(180deg, rgba(244, 244, 244, 0) 59%, rgba(22, 11, 171
   }
 
   .paragraph-table-Blog {
+    overflow          : hidden;
+    display           : -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+  .paragraph-ourblog {
     overflow          : hidden;
     display           : -webkit-box;
     -webkit-line-clamp: 6;
@@ -79,7 +91,43 @@ background: linear-gradient(180deg, rgba(244, 244, 244, 0) 59%, rgba(22, 11, 171
   }
 }
 
+@keyframes image-animation {
+  from {
+    transform: scale(0.8);
+    opacity  : 0;
+  }
 
+  to {
+    transform: scale(1);
+    opacity  : 1;
+  }
+}
+
+.selected-image-animation {
+  animation       : image-animation 0.5s ease-in-out;
+  transform-origin: center center;
+}
+
+.transitioning {
+  opacity   : 0;
+  transform : scale(0.8);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+img:not(.transitioning) {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+img:not(.transitioning):not(:first-child) {
+  opacity  : 0;
+  transform: scale(1.2);
+}
+
+
+select option {
+  max-width : 5rem;
+  overflow-y: auto;
+}
 
 
 

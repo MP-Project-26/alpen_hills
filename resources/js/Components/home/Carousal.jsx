@@ -43,7 +43,7 @@ export default function Carousel() {
                 <div className="absolute flex items-center w-full h-full  ">
                     <div className="md:ml-40 ml-14 mt-6 md:mt-0">
                         <h1 className="text-white lg:text-7xl md:text-5xl text-xl font-bold max-w-[30rem]">
-                            STELLAR JARDIN RESIDENCE
+                            INTINYA INI HEADING PIK.
                         </h1>
                         <p className="text-white lg:text-2xl md:text-md text-[0.7rem] lg:max-w-[40rem] md:max-w-[20rem] max-w-[15rem]">
                             Keanggunan Skandinavia, Hunian Damai, Kemewahan
