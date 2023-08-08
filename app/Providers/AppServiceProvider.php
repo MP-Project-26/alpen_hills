@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\CategoryGallery;
 use App\Models\User;
 use Gate;
 use Illuminate\Support\ServiceProvider;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('super_admin', function (User $user) {
             return $user->role;
         });
+
+        Inertia::share('category_gallery', CategoryGallery::all());
+
     }
 }

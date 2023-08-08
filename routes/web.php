@@ -9,6 +9,7 @@ use App\Http\Controllers\FasilitasPropertyController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SpesifikasiPropertyController;
 use App\Http\Controllers\TipePropertyController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,11 @@ Route::middleware('web') -> group(function () {
     Route::get('/about', function () {
         return Inertia::render('About');
     })->name('about');
+
+    Route::resource('property', ProductController::class)->parameters([
+        'property' => 'slug',
+    ]);
+
 
 });
 
@@ -87,6 +93,10 @@ Route::middleware('auth')->group(function () {
 
     //Comments Management
     Route::delete('/admin/comment/delete/{comment}', [CommentController::class, 'destroy'])->name('commentsAdmin.destroy');
+
+
+    Route::resource('spesifikasi', SpesifikasiPropertyController::class);
+    Route::resource('fasilitas', SpesifikasiPropertyController::class);
 });
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->name('userAdmin.index')->middleware('super_admin');

@@ -27,6 +27,7 @@ const ModalEditTypeProperty = ({ ...props }) => {
             ...prevData,
             name: props?.editTypeProperty?.name || "",
             slug: props?.editTypeProperty?.slug || "",
+            price: props?.editTypeProperty?.price || "",
         }));
 
         setFormattedPrice(formatToRupiah(props?.editTypeProperty?.price));

@@ -25,15 +25,6 @@ class HandleInertiaRequests extends Middleware
         return parent::version($request);
     }
 
-    public function handle($request , Closure $next )
-    {
-        //share data tipe property ke semua halaman
-        $tipeProperty = TipeProperty::all();
-        $request->session()->put('tipeProperty', $tipeProperty);
-        return $next($request);
-        
-
-    }
 
     /**
      * Define the props that are shared by default.

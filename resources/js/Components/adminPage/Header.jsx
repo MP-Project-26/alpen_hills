@@ -30,13 +30,13 @@ const Header = ({ auth, toggleSidebar, isSidebarOpen }) => {
   return (
     <header className="bg-white shadow-md h-auto w-full flex justify-between items-center sticky top-0 z-50 px-4">
       <div className="w-auto flex h-16 md:h-20 gap-2">
-        <button onClick={toggleSidebar} className="text-3xl lg:invisible block">
+        <button onClick={toggleSidebar} className="text-3xl lg:hidden block">
           <i className={`bi ${isSidebarOpen ? "bi-x-lg text-2xl" : "bi-list"}`}></i>
         </button>
         <Link href="/admin/dashboard">
           <img
-            className="h-full w-auto"
-            src="/assets/img/Logo_mp.png"
+            className="h-full w-full"
+            src="/storage/images/content/Logo_alpen.png"
             alt=""
           />
         </Link>
