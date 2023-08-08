@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useState } from "react";
 
 const Tipe = ({ ...props }) => {
-    const [categoryIdSelected, setCategoryIdSelected] = useState("");
+    const [categoryIdSelected, setCategoryIdSelected] = useState(1);
     const [scrollLeft, setScrollLeft] = useState(0); // Track the scroll position
 
 
