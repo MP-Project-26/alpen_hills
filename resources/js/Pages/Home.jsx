@@ -12,7 +12,7 @@ import OurBlog from "@/Components/home/OurBlog";
 import SliderImage from "@/Components/home/SliderImage";
 
 const Home = ({ ...props }) => {
-    const { dataGalery, dataBlog } = props;
+    const { dataGalery, dataBlog, dataCategory } = props;
     const [popular, setPopular] = useState([]);
     useEffect(() => {
         const dataPopularBlog = [...dataBlog.data].sort(
@@ -32,14 +32,14 @@ const Home = ({ ...props }) => {
         <GuestLayout title={props.title}>
             <HeadCarousel />
             <AboutUs />
-            <SliderImage galleries={dataGalery.data} />
+            <SliderImage galleries={dataGalery.data} category={dataCategory} />
             <OurBlog ourBlog={ourBlog[0]} />
             <Trending popular={popular} />
             {/* Slide 5 */}
             <div className="py-5" data-aos="zoom-in-down">
                 <div className="flex flex-col items-center justify-center gap-8">
                     <div className="flex flex-col lg:flex-row flex-wrap justify-center gap-5 ">
-                        {new Array(3).fill(0).map((_, i) => (
+                        {leanmore.map((item, i) => (
                             <div className="  w-80  lg:w-96 shadow-xl" key={i}>
                                 <div className="relative">
                                     <div className="absolute top-2 left-2 bg-primary-custom py-1 px-5 text-white rounded-md text-md md:text-md lg:text-2xl">
@@ -47,14 +47,14 @@ const Home = ({ ...props }) => {
                                     </div>
                                     <div className="w-full">
                                         <img
-                                            src="/storage/images/content/home/fasilitas.png"
+                                            src={`/storage/images/content/home/${item.image}`}
                                             alt="Shoes"
                                             className="w-full z-10"
                                         />
                                     </div>
                                     <div className="absolute bottom-10 w-full flex justify-center ">
                                         <p className="text-white text-xl md:text-2xl lg:text-5xl font-extrabold">
-                                            FASILITAS
+                                            {item.title}
                                         </p>
                                     </div>
                                 </div>
@@ -68,3 +68,21 @@ const Home = ({ ...props }) => {
 };
 
 export default Home;
+
+const leanmore = [
+    {
+        id: 1,
+        title: "FASILITAS",
+        image: "fasilitas.png",
+    },
+    {
+        id: 2,
+        title: "ACCESS",
+        image: "fasilitas.png",
+    },
+    {
+        id: 3,
+        title: "LOKASI",
+        image: "fasilitas.png",
+    },
+];

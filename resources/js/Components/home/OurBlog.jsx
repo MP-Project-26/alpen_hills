@@ -4,7 +4,6 @@ import { Link } from "@inertiajs/react";
 import parse from "html-react-parser";
 
 export default function OurBlog({ ourBlog }) {
-    console.log(ourBlog);
     return (
         <div className="w-full py-10 lg:py-20 px-0 md:px-[6rem]">
             <div className="flex flex-col items-center justify-center gap-8">

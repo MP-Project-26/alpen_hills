@@ -10,101 +10,24 @@ import {
 } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 
-const SliderImage = ({ galleries }) => {
+const SliderImage = ({ galleries, category }) => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [activeTab, setActiveTab] = useState("Exterior");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    function move(from, to, arr) {
+        const newArr = [...arr];
+
+        const item = newArr.splice(from, 1)[0];
+        newArr.splice(to, 0, item);
+
+        return newArr;
+    }
+
     const exteriorGallery = galleries.filter(
-        (item) => item.category_gallery.name === "Exterior"
-    );
-    const interiorGallery = galleries.filter(
-        (item) => item.category_gallery.name === "Interior"
-    );
-    const potonganGallery = galleries.filter(
-        (item) => item.category_gallery.name === "Potongan"
-    );
-    const denahGallery = galleries.filter(
-        (item) => item.category_gallery.name === "Denah"
+        (item) => item.category_gallery.name === activeTab
     );
 
-    const Exterior = exteriorGallery.map((item, index) => {
-        return (
-            <TabPanel key={item.id} value={item.category_gallery.name}>
-                <div
-                    className="flex  justify-center item-img  hover:scale-110 transform transition-all duration-500 ease-in-out"
-                    key={index}
-                    onClick={(event) => handleImageClick(event, item.image)}
-                >
-                    <a href={`#${item.id}`}>
-                        <CardImage
-                            image={`/storage/images/gallery/${item.image}`}
-                            title={item.id}
-                        />
-                    </a>
-                </div>
-            </TabPanel>
-        );
-    });
-
-    const Interior = interiorGallery.map((item, index) => {
-        return (
-            <TabPanel key={item.id} value={item.category_gallery.name}>
-                <div
-                    className="flex lg:gap-[3rem] justify-center item-img hover:scale-110 transform transition-all duration-500 ease-in-out"
-                    key={index}
-                    onClick={(event) => handleImageClick(event, item.image)}
-                >
-                    <a href={`#${item.id}`}>
-                        <CardImage
-                            image={`/storage/images/gallery/${item.image}`}
-                            title={item.id}
-                        />
-                    </a>
-                </div>
-            </TabPanel>
-        );
-    });
-
-    const Potongan = potonganGallery.map((item, index) => {
-        return (
-            <TabPanel key={item.id} value={item.category_gallery.name}>
-                <div
-                    className="flex  justify-center item-img hover:scale-110 transform transition-all duration-500 ease-in-out"
-                    key={index}
-                    onClick={(event) => handleImageClick(event, item.image)}
-                >
-                    <a href={`#${item.id}`}>
-                        <CardImage
-                            className="h-full w-auto"
-                            image={`/storage/images/gallery/${item.image}`}
-                            title={item.id}
-                        />
-                    </a>
-                </div>
-            </TabPanel>
-        );
-    });
-
-    const Denah = denahGallery.map((item, index) => {
-        return (
-            <TabPanel key={item.id} value={item.category_gallery.name}>
-                <div
-                    className="flex  justify-center item-img hover:scale-110 transform transition-all duration-500 ease-in-out"
-                    key={index}
-                    onClick={(event) => handleImageClick(event, item.image)}
-                >
-                    <a href={`#${item.id}`}>
-                        <CardImage
-                            className="h-full w-auto"
-                            image={`/storage/images/gallery/${item.image}`}
-                            title={item.id}
-                        />
-                    </a>
-                </div>
-            </TabPanel>
-        );
-    });
 
     const responsive = {
         superLargeDesktop: {
@@ -124,13 +47,6 @@ const SliderImage = ({ galleries }) => {
             items: 2,
         },
     };
-
-    const data = [
-        { label: "Exterior", value: "Exterior" },
-        { label: "Interior", value: "Interior" },
-        { label: "Potongan", value: "Potongan" },
-        { label: "Denah", value: "Denah" },
-    ];
 
     const handleImageClick = (event, image) => {
         event.preventDefault();
@@ -167,83 +83,55 @@ const SliderImage = ({ galleries }) => {
                                         "bg-transparent border-b-2 border-blue-500 shadow-none rounded-none",
                                 }}
                             >
-                                {data.map(({ label, value }) => (
+                                {move(2, 0, category).map((item, i) => (
                                     <Tab
-                                        key={value}
-                                        value={value}
-                                        onClick={() => setActiveTab(value)}
+                                        key={item.id}
+                                        value={item.name}
+                                        onClick={() => setActiveTab(item.name)}
                                         className={
-                                            activeTab === value
+                                            activeTab === item.name
                                                 ? "text-blue-500"
                                                 : ""
                                         }
                                     >
-                                        {label}
+                                        {item.name}
                                     </Tab>
                                 ))}
                             </TabsHeader>
                             <TabsBody className=" inset-0 z-10">
-                                {activeTab === "Exterior" ? (
-                                    <div>
-                                        <Carousel
-                                            responsive={responsive}
-                                            infinite={true}
-                                            className="image-slider"
-                                            renderButtonGroupOutside={true}
-                                            centerMode={true}
-                                            centerSlidePercentage={75}
-                                            partialVisible={false}
-                                            itemClass="carousel-item"
+                                <Carousel
+                                    responsive={responsive}
+                                    infinite={true}
+                                    className="image-slider"
+                                    renderButtonGroupOutside={true}
+                                    centerMode={true}
+                                    centerSlidePercentage={75}
+                                    partialVisible={false}
+                                    itemClass="carousel-item"
+                                >
+                                    {exteriorGallery.map((item, i) => (
+                                        <TabPanel
+                                            key={item.id}
+                                            value={item.category_gallery.name}
                                         >
-                                            {Exterior}
-                                        </Carousel>
-                                    </div>
-                                ) : activeTab === "Interior" ? (
-                                    <div>
-                                        <Carousel
-                                            responsive={responsive}
-                                            infinite={true}
-                                            className="image-slider"
-                                            renderButtonGroupOutside={true}
-                                            centerMode={true}
-                                            centerSlidePercentage={75}
-                                            partialVisible={false}
-                                            itemClass="carousel-item"
-                                        >
-                                            {Interior}
-                                        </Carousel>
-                                    </div>
-                                ) : activeTab === "Potongan" ? (
-                                    <div>
-                                        <Carousel
-                                            responsive={responsive}
-                                            infinite={true}
-                                            className="image-slider"
-                                            renderButtonGroupOutside={true}
-                                            centerMode={true}
-                                            centerSlidePercentage={75}
-                                            partialVisible={false}
-                                            itemClass="carousel-item"
-                                        >
-                                            {Potongan}
-                                        </Carousel>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <Carousel
-                                            responsive={responsive}
-                                            infinite={true}
-                                            className="image-slider"
-                                            renderButtonGroupOutside={true}
-                                            centerMode={true}
-                                            centerSlidePercentage={75}
-                                            partialVisible={false}
-                                            itemClass="carousel-item"
-                                        >
-                                            {Denah}
-                                        </Carousel>
-                                    </div>
-                                )}
+                                            <div className="flex flex-row justify-center item-img  hover:scale-110 transform transition-all duration-500 ease-in-out">
+                                                <div className=" flex bg-white select-none cursor-pointer">
+                                                    <img
+                                                        onClick={(event) => {
+                                                            handleImageClick(
+                                                                event,
+                                                                item.image
+                                                            );
+                                                        }}
+                                                        src={`/storage/images/gallery/${item.image}`}
+                                                        alt={item.name}
+                                                        className="lg:h-[9rem] lg:w-[16rem] md:h-[7rem] md:w-[11rem] h-[5rem] w-[8rem] object-cover "
+                                                    />
+                                                </div>
+                                            </div>
+                                        </TabPanel>
+                                    ))}
+                                </Carousel>
                             </TabsBody>
                         </Tabs>
                     </div>

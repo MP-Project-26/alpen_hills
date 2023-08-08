@@ -163,38 +163,25 @@ export default function About() {
                         iste quam placeat at voluptatem ratione quo laudantium.
                     </p>
                 </div>
-                <div className="flex lg:flex-row flex-col flex-wrap justify-center gap-5 ">
-                    {new Array(4).fill(0).map((_, i) => (
+                <div className="flex lg:flex-row flex-col flex-wrap justify-center gap-5 p-10">
+                    {need.map((item, i) => (
                         <div
-                            className="card w-80 lg:w-96 bg-base-100 shadow-xl"
+                            className="card w-[18rem] lg:w-80 bg-base-100 shadow-xl relative"
                             key={i}
                         >
+                            <div className="absolute top-2 left-2 bg-primary-custom text-white font-semibold text-xl p-2">
+                                {item.id < 10 ? `0${item.id}` : item.id}
+                            </div>
                             <figure>
                                 <img
-                                    src="/storage/images/content/about/slide2-layer1.png"
+                                    src={`/storage/images/content/about/${item.image}`}
                                     alt="Shoes"
-                                    className="w-full"
+                                    className="w-full rounded-t-xl"
                                 />
                             </figure>
                             <div className="card-body">
-                                <h2 className="card-title">
-                                    Shoes!
-                                    <div className="badge badge-secondary">
-                                        NEW
-                                    </div>
-                                </h2>
-                                <p>
-                                    If a dog chews shoes whose shoes does he
-                                    choose?
-                                </p>
-                                <div className="card-actions justify-end">
-                                    <div className="badge badge-outline">
-                                        Fashion
-                                    </div>
-                                    <div className="badge badge-outline">
-                                        Products
-                                    </div>
-                                </div>
+                                <h2 className="card-title">{item.title}</h2>
+                                <p>{item.des}</p>
                             </div>
                         </div>
                     ))}
@@ -203,3 +190,30 @@ export default function About() {
         </GuestLayout>
     );
 }
+
+const need = [
+    {
+        id: 1,
+        title: "QUANTITY",
+        des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+        image: "about_1.png",
+    },
+    {
+        id: 2,
+        title: "EASY ACCESS",
+        des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+        image: "about_1.png",
+    },
+    {
+        id: 3,
+        title: "ENVIRONMENT",
+        des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+        image: "about_1.png",
+    },
+    {
+        id: 4,
+        title: "MODEREN",
+        des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+        image: "about_1.png",
+    },
+];

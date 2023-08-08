@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Resources\PostsCollection;
+use App\Models\CategoryGallery;
 
 class HomeController extends Controller
 {
@@ -16,6 +17,10 @@ class HomeController extends Controller
         $galleryQuery = Gallery::with(['categoryGallery', 'tipeProperty']);
         $dataGalery = new GalleriesCollection($galleryQuery->get());
 
+        $categoryQuery = CategoryGallery::all()->load('galleries');
+        $dataCategory = $categoryQuery;
+
+
         $postQuery = Post::with(['categoryPost', 'userPost', 'comments'])->latest();
         $dataBlog = new PostsCollection($postQuery->get());
 
@@ -23,6 +28,7 @@ class HomeController extends Controller
             'title' => 'Home',
             'dataGalery' => $dataGalery,
             'dataBlog' => $dataBlog,
+            'dataCategory' => $dataCategory,
         ]);
     }
 }
