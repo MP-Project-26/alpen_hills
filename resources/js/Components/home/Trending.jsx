@@ -1,12 +1,20 @@
 import React from "react";
 import parse from "html-react-parser";
 import { Link } from "@inertiajs/react";
+import axios from "axios";
 
 export default function Trending({ popular }) {
+    const addViewCount = async (dataView) => {
+        await axios.put(`/blog/view/${dataView.id}`, dataView, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    };
     return (
         <div className="flex flex-col items-center justify-center gap-8 pt-20">
             <div className="text-6xl font-extrabold flex flex-col items-center gap-6 -mt-5 mb-4">
-                <div className="text-gray-700 lg:text-7xl md:text-5xl text-4xl">
+                <div className="text-gray-700 lg:text-5xl md:text-3xl text-2xl">
                     <span className="text-primary-custom">TRENDING</span> TOPICS
                 </div>
                 <div className="w-20 h-2 bg-primary-custom"></div>
@@ -14,7 +22,7 @@ export default function Trending({ popular }) {
             <div className="flex flex-col lg:flex-row flex-wrap justify-center gap-5 ">
                 {popular.map((item, i) => (
                     <div
-                        className="card w-80 lg:w-96 bg-base-100 shadow-xl"
+                        className="card rounded-none w-[15rem]  lg:w-80 bg-base-100 shadow-md"
                         key={i}
                     >
                         <figure>
@@ -72,6 +80,9 @@ export default function Trending({ popular }) {
                                 {parse(item.body)}
                             </div>
                             <Link
+                                onClick={() => {
+                                    addViewCount(item);
+                                }}
                                 href={`/blog/spesifik/${item?.id}`}
                                 className="flex flex-row gap-2 items-center text-xl font-semibold cursor-pointer "
                             >

@@ -78,21 +78,28 @@ class DatabaseSeeder extends Seeder
 
         TipeProperty::insert([
             [
-                'name' => 'Tipe 4 Meter',
-                'slug' => 'tipe-4-meter',
+                'name' => 'Standard',
+                'slug' => 'standard',
                 'price' => 600000000,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Tipe 6 Meter',
-                'slug' => 'tipe-6-meter',
+                'name' => 'Deluxe',
+                'slug' => 'deluxe',
                 'price' => 800000000,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Exclusive',
+                'slug' => 'exclusive',
+                'price' => 1000000000,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
-        Gallery::factory(5)->create();
+        Gallery::factory(30)->create();
 
         SpefisikasiProperty::factory(15)->create();
         FasilitasProperty::factory(15)->create();

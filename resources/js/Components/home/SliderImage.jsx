@@ -68,9 +68,9 @@ const SliderImage = ({ galleries, category }) => {
             <div className=" p-0 lg:py-5" data-aos="zoom-in-down">
                 <div className="w-full  h-auto flex mb-3 lg:px-40 md:px-20 px-4">
                     <div className="w-2 bg-primary-custom mr-2 lg:mr-5 md:mr-3"></div>
-                    <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold text-primary-custom">
-                        GAL
-                        <span className="text-gray-700">ERI</span>
+                    <h1 className="lg:text-5xl md:text-3xl text-2xl font-extrabold text-primary-custom">
+                        GALL
+                        <span className="text-gray-700">ERY</span>
                     </h1>
                 </div>
                 <div id="gallery" className="lg:px-40 md:px-20 px-4">

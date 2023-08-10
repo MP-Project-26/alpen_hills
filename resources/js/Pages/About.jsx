@@ -4,7 +4,7 @@ import React from "react";
 export default function About() {
     return (
         <GuestLayout title="About">
-            <div className="w-full bg-[#FDFDFD] flex flex-col h-auto justify-center items-center py-20 px-5 gap-0 lg:gap-20">
+            <div className="w-full bg-[#FDFDFD] flex flex-col h-auto justify-center items-center py-20 px-5 gap-0 lg:gap-20 mt-10 ">
                 {/* title */}{" "}
                 <div className="flex justify-center h-auto p-1 m-4 lg:m-10">
                     <h1 className="font-sans font-bold text-3xl lg:text-5xl">
@@ -25,9 +25,9 @@ export default function About() {
                                     alt=""
                                 />
                             </div>
-                            <div className="flex w-full justify-center lg:top-[5%] lg:left-[20%] -top-[185px] left-[20%] absolute md:items-center py-8 pl-12 lg:items-center lg:pl-20 md:pl-16">
+                            <div className="flex w-[50%] justify-center absolute lg:top-[55%] top-[45%] left-[50%]">
                                 <img
-                                    className=" w-[50%] mt-[18rem]"
+                                    // className=" w-[50%] mt-[18rem]"
                                     src="/storage/images/content/about/layer_1.png"
                                     alt=""
                                 />
@@ -73,7 +73,7 @@ export default function About() {
                 </div>
             </div>
             {/* Slide 2 */}
-            <div className="w-full flex bg-primary-custom h-[85rem] lg:h-[45rem] justify-between py-10 my-20 px-5 lg:px-20 gap-20 flex-col lg:flex-row">
+            <div className="w-full flex bg-primary-custom h-[85rem] lg:h-[45rem] justify-between py-10 my-20 px-5 lg:px-32 gap-10 flex-col lg:flex-row">
                 <div className="w-full h-full flex flex-col justify-between gap-10 py-5">
                     <h1 className="font-sans font-bold text-3xl lg:text-5xl text-white">
                         Lorem, ipsum.{" "}
@@ -111,13 +111,13 @@ export default function About() {
                     </div>
                 </div>
                 <div className="w-full h-full ">
-                    <div className="relative   md:pl-20">
-                        <div className="card w-[18rem] lg:w-96 bg-base-100 rounded-none z-10">
+                    <div className="relative w-full  md:pl-20">
+                        <div className="card w-[18rem]  lg:w-96  bg-base-100 rounded-none z-10">
                             <figure>
                                 <img
                                     src="/storage/images/content/about/slide2-layer1.png"
                                     alt="Shoes"
-                                    className="w-full"
+                                    className="w-full "
                                 />
                             </figure>
                             <div className="card-body">
@@ -128,13 +128,13 @@ export default function About() {
                                 </p>
                             </div>
                         </div>
-                        <div className="flex w-full justify-center h-full top-[40%] -left-[2%] md:-top-[16%] md:-left-[2%] lg:top-[30%] lg:left-[5%] absolute md:items-center py-8 pl-12 lg:items-center lg:pl-20 md:pl-16">
-                            <div className="card w-96 bg-base-100 shadow-xl rounded-none">
+                        <div className="flex  w-[18rem] lg:w-96 justify-center h-full  absolute lg:left-[30%] top-[30%] left-[15%]">
+                            <div className="card  bg-base-100 shadow-xl rounded-none">
                                 <figure>
                                     <img
                                         src="/storage/images/content/about/slide2-layer1.png"
                                         alt="Shoes"
-                                        className="w-full"
+                                        className="w-full "
                                     />
                                 </figure>
                                 <div className="card-body">
@@ -166,7 +166,7 @@ export default function About() {
                 <div className="flex lg:flex-row flex-col flex-wrap justify-center gap-5 p-10">
                     {need.map((item, i) => (
                         <div
-                            className="card w-[18rem] lg:w-80 bg-base-100 shadow-xl relative"
+                            className="card w-[15rem] bg-base-100 shadow-xl relative"
                             key={i}
                         >
                             <div className="absolute top-2 left-2 bg-primary-custom text-white font-semibold text-xl p-2">

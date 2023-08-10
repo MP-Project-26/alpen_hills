@@ -22,7 +22,7 @@ const Tipe = ({ ...props }) => {
     const [selectedGallery, setSelectedGallery] = useState([null]);
     const [transition, setTransition] = useState(false);
 
-    console.log("props : ", props);
+    console.log("props : ", props.product.fasilitas_property);
 
     const handleClikImage = (e, item) => {
         e.preventDefault();
@@ -76,11 +76,7 @@ const Tipe = ({ ...props }) => {
                             </h1>
                         </div>
                         <img
-                            src={
-                                selectedGallery.image
-                                    ? `/storage/images/gallery/${selectedGallery.image}`
-                                    : `/storage/images/gallery/${props?.product?.gallery[0]?.image}`
-                            }
+                            src={`/storage/images/gallery/${selectedGallery?.image}`}
                             alt=""
                             className={`md:w-[70%] w-full md:my-4 my-0 ${
                                 transition ? "transitioning" : ""

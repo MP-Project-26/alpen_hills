@@ -8,7 +8,7 @@ export default function OurBlog({ ourBlog }) {
         <div className="w-full py-10 lg:py-20 px-0 md:px-[6rem]">
             <div className="flex flex-col items-center justify-center gap-8">
                 <div className="text-6xl font-extrabold flex flex-col items-center gap-6 ">
-                    <div className="text-gray-700 lg:text-7xl md:text-5xl text-4xl">
+                    <div className="text-gray-700 lg:text-5xl md:text-3xl text-2xl">
                         <span className="text-primary-custom ">OUR</span> BLOG
                     </div>
                     <div className="w-20 h-2 bg-primary-custom"></div>
@@ -17,6 +17,7 @@ export default function OurBlog({ ourBlog }) {
                     <img
                         src="/storage/images/content/home/ourblog.png"
                         alt=""
+                        className="w-full lg:w-1/2 md:w-full h-full object-cover p-4"
                     />
                     <div className="flex flex-col gap-5 py-10">
                         <div className="flex flex-col gap-2">

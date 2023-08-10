@@ -37,7 +37,7 @@ const GuestLayout = ({ children, title }) => {
         <>
             {title && <Head title={title} />}
             <Navbar  tipeProperty={tipeProperty}/>
-            <main className="-mt-[5rem] relative">
+            <main className="-mt-[7rem] relative">
                 {children}
                 <div
                     className={` ${

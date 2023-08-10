@@ -49,7 +49,7 @@ export default function Navbar({tipeProperty}) {
                         </label>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content mt-3 z-[1] py-2 px-6 shadow bg-green-custom rounded-sm w-52"
+                            className="menu menu-sm dropdown-content mt-3 z-[1] py-2 px-6 shadow bg-primary-custom rounded-sm w-52"
                         >
                             <li>
                                 <Link
@@ -104,7 +104,7 @@ export default function Navbar({tipeProperty}) {
                         <img
                             src="/storage/images/content/Logo_Alpen.png"
                             alt="Logo"
-                            className="w-[8rem] lg:w-[12rem] cursor-pointer filter invert"
+                            className="w-[8rem] lg:w-[10rem] cursor-pointer filter invert"
                         />
                     </Link>
                 </div>

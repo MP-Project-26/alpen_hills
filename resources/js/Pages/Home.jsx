@@ -36,11 +36,11 @@ const Home = ({ ...props }) => {
             <OurBlog ourBlog={ourBlog[0]} />
             <Trending popular={popular} />
             {/* Slide 5 */}
-            <div className="py-5" data-aos="zoom-in-down">
+            <div className="py-5 mt-10" data-aos="zoom-in-down">
                 <div className="flex flex-col items-center justify-center gap-8">
                     <div className="flex flex-col lg:flex-row flex-wrap justify-center gap-5 ">
                         {leanmore.map((item, i) => (
-                            <div className="  w-80  lg:w-96 shadow-xl" key={i}>
+                            <div className="  w-[15rem]  lg:w-80 shadow-xl" key={i}>
                                 <div className="relative">
                                     <div className="absolute top-2 left-2 bg-primary-custom py-1 px-5 text-white rounded-md text-md md:text-md lg:text-2xl">
                                         Lean More

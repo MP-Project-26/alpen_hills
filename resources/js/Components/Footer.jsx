@@ -10,7 +10,7 @@ export default function Footer() {
                 <img
                     src={"/storage/images/content/Logo_Alpen.png"}
                     alt="Logo"
-                    className="w-[17rem] lg:w-[20rem]  cursor-pointer m-0  lg:-ml-[5rem] object-contain "
+                    className="w-[12rem] lg:w-[20rem]  cursor-pointer m-0  lg:-ml-[5rem] object-contain "
                 />
                 <div className=" w-full lg:w-[70%] flex flex-col gap-5 lg:gap-0 lg:flex-row justify-evenly p-7 lg:p-0">
                     <div className="flex flex-col gap-2 w-[10rem] ">

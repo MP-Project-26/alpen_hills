@@ -126,14 +126,7 @@
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-img:not(.transitioning) {
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
 
-img:not(.transitioning):not(:first-child) {
-  opacity  : 0;
-  transform: scale(1.2);
-}
 
 
 select option {
