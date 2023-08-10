@@ -1,43 +1,97 @@
-import { usePage } from "@inertiajs/react";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
 
-const NavMid = ({ onCategoryIdSelected }) => {
-    const { category_gallery } = usePage().props;
-    const [idCategory, setIdCategory] = useState("");
-    const [activeCategory, setActiveCategory] = useState(false);
+const NavMid = () => {
+    const [active, setActive] = useState("");
+    const [hovered, setHovered] = useState("");
+    const activeClass = "text-primary-custom font-bold";
 
-    //set default id category
-    useEffect(() => {
-        if (category_gallery?.length > 0) {
-            setIdCategory(category_gallery[0].id);
-            setActiveCategory(true);
+    const handleHover = (link) => {
+        setHovered(link);
+    };
+
+    const clearHover = () => {
+        setHovered("");
+    };
+
+    const renderIcon = (link) => {
+        if (active === link || hovered === link) {
+            return <i className="fas fa-circle text-sm"></i>;
         }
-    }, [category_gallery]);
+        return null;
+    };
 
+    const handleClick = (link) => {
+        setActive(link);
+        scrollToSection(link);
+    };
 
-    const handleClikMenu = (e, item) => {
-        e.preventDefault();
-        setIdCategory(item);
-        setActiveCategory(true);
-        onCategoryIdSelected(item);
+    const scrollToSection = (sectionId) => {
+        let element = document.getElementById(sectionId);
+        element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+        });
     };
 
     return (
-        <div className="h-auto p-2 bg-primary-custom bg-opacity-20 shadow-md mt-2">
-            <ul className="flex justify-between font-medium">
-                {category_gallery?.map((category, index) => (
-                    <li
-                        onClick={(e) => handleClikMenu(e, category.id)}
-                        key={index}
-                        className={`cursor-pointer text-primary-custom text-opacity-40 hover:text-opacity-100 hover:border-b-2 border-primary-custom ${idCategory === category.id && activeCategory ? 'border-b-2 border-primary-custom text-opacity-100' : ''}`}
+        <div className="lg:w-full md:w-full lg:px-36 md:px-16 px-4 w-full overflow-x-auto  my-3  bg-white sticky top-[8%] md:top-[6%] lg:top-[9%]">
+            <ul className="md:gap-10 gap-5 justify-start lg:justify-start flex text-primary-custom text-opacity-30 h-12 items-end">
+                <li>
+                    <div
+                        className={`flex flex-col items-center cursor-pointer text-lg hover:text-primary-custom font-medium ${
+                            active === "gallery" ? activeClass : ""
+                        }`}
+                        onClick={() => {
+                            handleClick("gallery");
+                            scrollToSection("gallery");
+                        }}
+                        onMouseEnter={() => handleHover("gallery")}
+                        onMouseLeave={clearHover}
                     >
-                        {category?.name}
-                    </li>
-                ))}
+                        {renderIcon("gallery")}
+                        <h1>Gallery</h1>
+                    </div>
+                </li>
+                <li>
+                    <div
+                        className={`flex flex-col items-center cursor-pointer text-lg  hover:text-primary-custom font-medium ${
+                            active === "spesifikasi" ? activeClass : ""
+                        }}`}
+                        onClick={() => {
+                            handleClick("spesifikasi");
+                            scrollToSection("spesifikasi");
+                        }}
+                        onMouseEnter={() => handleHover("spesifikasi")}
+                        onMouseLeave={clearHover}
+                    >
+                        {renderIcon("spesifikasi")}
+                        <h1>Spesifikasi</h1>
+                    </div>
+                </li>
+
+                <li className="w-auto">
+                    <div
+                        className={`flex  flex-col items-center cursor-pointer text-lg  hover:text-primary-custom font-medium ${
+                            active === "fasilitas" ? activeClass : ""
+                        }`}
+                        onClick={() => {
+                            handleClick("fasilitas");
+                            scrollToSection("fasilitas");
+                        }}
+                        onMouseEnter={() => handleHover("fasilitas")}
+                        onMouseLeave={clearHover}
+                    >
+                        {renderIcon("fasilitas")}
+                        <h1 className="flex text-nowrap">
+                            Fasilitas <span>&nbsp;&amp;&nbsp;</span> <span> Akses</span>
+                        </h1>
+                    </div>
+                </li>
             </ul>
         </div>
     );
 };
 
 export default NavMid;
-

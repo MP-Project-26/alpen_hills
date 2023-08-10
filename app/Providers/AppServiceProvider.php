@@ -27,7 +27,5 @@ class AppServiceProvider extends ServiceProvider
             return $user->role;
         });
 
-        Inertia::share('category_gallery', CategoryGallery::all());
-
     }
 }

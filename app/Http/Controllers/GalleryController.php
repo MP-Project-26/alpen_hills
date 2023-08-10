@@ -67,7 +67,8 @@ class GalleryController extends Controller
      */
     public function store(GalleryRequest $request)
     {
-        $imageName = $request->image->getClientOriginalName();
+
+        $imageName = time() . $request->file('image')->getClientOriginalName();
         $imagePath = $request->file('image')->storeAs('public/images/gallery', $imageName);
         $gallery = new Gallery();
         $gallery->name = $request->name;

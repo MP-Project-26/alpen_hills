@@ -1,10 +1,10 @@
 export const CardImage = ({ image, title }) => {
     return (
-        <div className=" flex bg-white select-none cursor-pointer">
+        <div className=" flex bg-white select-none cursor-pointer h-auto w-full">
             <img
-                src={image}
+                src={`/storage/images/gallery/${image}`}
                 alt={title}
-                className="lg:h-[9rem] lg:w-[16rem] md:h-[7rem] md:w-[11rem] h-[5rem] w-[8rem] object-cover "
+                className=" object-cover w-full h-full "
             />
         </div>
     );

@@ -23,7 +23,7 @@ class StoreFasilitasPropertyRequest extends FormRequest
     {
         return [
             'tipe_property_id' => 'required|exists:tipe_properties,id',
-            'icon' => 'required',
+
             'attribute' => 'required',
             'value' => 'required',
         ];
@@ -33,7 +33,6 @@ class StoreFasilitasPropertyRequest extends FormRequest
         return [
             'tipe_property_id.required' => 'Tipe Property Harus Diisi !',
             'tipe_property_id.exists' => 'Tipe Property Tidak Ditemukan !',
-            'icon.required' => 'Icon Harus Diisi !',
             'attribute.required' => 'Attribute Harus Diisi !',
             'value.required' => 'Value Harus Diisi !',
         ];

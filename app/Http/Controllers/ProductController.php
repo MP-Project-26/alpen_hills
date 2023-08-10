@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CategoryGallery;
 use App\Models\TipeProperty;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -38,11 +39,17 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = TipeProperty::where('slug', $slug)->first();
-        $product->load(['spefisikasiProperty', 'fasilitasProperty', 'gallery']);
+        $product->load(['spefisikasiProperty', 'fasilitasProperty', 'gallery',]);
+        //get product with gallery to rellation category gallery
+        $product->gallery->load(['categoryGallery']);
+
+        $categoryGallery = CategoryGallery::latest()->get();
+
 
         return Inertia::render('Tipe', [
             'title' => 'Tipe '.$product->name,
             'product' => $product,
+            'categoryGallery' => $categoryGallery,
         ]);
     }
 

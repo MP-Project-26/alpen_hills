@@ -22,7 +22,7 @@ class UpdateFasilitasPropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'icon' => 'required',
+
             'attribute' => 'required',
             'value' => 'required',
         ];
