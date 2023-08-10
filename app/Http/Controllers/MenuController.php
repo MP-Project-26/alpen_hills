@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SpefisikasiProperty;
-use App\Http\Requests\StoreSpefisikasiPropertyRequest;
-use App\Http\Requests\UpdateSpefisikasiPropertyRequest;
+use App\Models\Menu;
+use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\UpdateMenuRequest;
 
-class SpefisikasiPropertyController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class SpefisikasiPropertyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSpefisikasiPropertyRequest $request)
+    public function store(StoreMenuRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class SpefisikasiPropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SpefisikasiProperty $spefisikasiProperty)
+    public function show(Menu $menu)
     {
         //
     }
@@ -43,7 +43,7 @@ class SpefisikasiPropertyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SpefisikasiProperty $spefisikasiProperty)
+    public function edit(Menu $menu)
     {
         //
     }
@@ -51,7 +51,7 @@ class SpefisikasiPropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSpefisikasiPropertyRequest $request, SpefisikasiProperty $spefisikasiProperty)
+    public function update(UpdateMenuRequest $request, Menu $menu)
     {
         //
     }
@@ -59,7 +59,7 @@ class SpefisikasiPropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SpefisikasiProperty $spefisikasiProperty)
+    public function destroy(Menu $menu)
     {
         //
     }

@@ -5,9 +5,12 @@ use App\Http\Controllers\AuthAdmin\AuthController;
 use App\Http\Controllers\CategoryGalleryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FasilitasPropertyController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SpesifikasiPropertyController;
 use App\Http\Controllers\TipePropertyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,18 +31,27 @@ Route::middleware('guest')->prefix('admin')->group(function () {
     Route::post('/login', [AuthController::class, 'store'])->name('login.store');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::middleware('web') -> group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/blog', [PostController::class, 'blog'])->name('blog');
-Route::post('/blog/search', [PostController::class, 'search'])->name('search');
+    Route::get('/blog', [PostController::class, 'blog'])->name('blog');
+    Route::post('/blog/search', [PostController::class, 'search'])->name('search');
 
-Route::get('/blog/spesifik/{id}', [PostController::class, 'blogSpesifik'])->name('blog');
-Route::post('/blog/comment/{id}', [PostController::class, 'addComments'])->name('comments');
-Route::put('/blog/view/{id}', [PostController::class, 'addViews'])->name('view');
+    Route::get('/blog/spesifik/{id}', [PostController::class, 'blogSpesifik'])->name('blog');
+    Route::post('/blog/comment/{id}', [PostController::class, 'addComments'])->name('comments');
+    Route::put('/blog/view/{id}', [PostController::class, 'addViews'])->name('view');
 
-Route::get('/about', function () {
-    return Inertia::render('About');
-})->name('about');
+    Route::get('/about', function () {
+        return Inertia::render('About');
+    })->name('about');
+
+    Route::resource('property', ProductController::class)->parameters([
+        'property' => 'slug',
+    ]);
+
+
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/profile/{user}', [AuthController::class, 'show'])->name('profile.show');
@@ -63,7 +75,7 @@ Route::middleware('auth')->group(function () {
 
     //Type Property Management
     Route::post('/admin/typeProperty/add', [TipePropertyController::class, 'store'])->name('typePropertyAdmin.store');
-    Route::delete('/admin/typeProperty/delete/{slug}', [TipePropertyController::class, 'destroy'])->name('typePropertyAdmin.destroy');
+    Route::delete('/admin/typeProperty/delete/{id}', [TipePropertyController::class, 'destroy'])->name('typePropertyAdmin.destroy');
     Route::post('/admin/typeProperty/update/{slug}', [TipePropertyController::class, 'update'])->name('typePropertyAdmin.update');
     Route::get('/admin/typeProperty/{tipeProperty}', [TipePropertyController::class, 'show'])->name('typePropertyAdmin.show');
 
@@ -81,6 +93,10 @@ Route::middleware('auth')->group(function () {
 
     //Comments Management
     Route::delete('/admin/comment/delete/{comment}', [CommentController::class, 'destroy'])->name('commentsAdmin.destroy');
+
+
+    Route::resource('spesifikasi', SpesifikasiPropertyController::class);
+    Route::resource('fasilitas', SpesifikasiPropertyController::class);
 });
 
 Route::get('/admin/user', [AdminUserController::class, 'index'])->name('userAdmin.index')->middleware('super_admin');

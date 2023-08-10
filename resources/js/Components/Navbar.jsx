@@ -1,10 +1,10 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import React from "react";
 import { useEffect } from "react";
 
-export default function Navbar() {
-    const [open, setOpen] = React.useState(false);
+export default function Navbar({tipeProperty}) {
 
+    const [open, setOpen] = React.useState(false);
     const location = window.location.pathname;
 
     const [scroll, setScroll] = React.useState(0);
@@ -54,7 +54,7 @@ export default function Navbar() {
                             <li>
                                 <Link
                                     href="/"
-                                    className=" font-semibold text-xl "
+                                    className=" font-medium text-xl "
                                 >
                                     Home
                                 </Link>
@@ -62,7 +62,7 @@ export default function Navbar() {
                             <li>
                                 <Link
                                     href="/about"
-                                    className=" font-semibold text-xl "
+                                    className=" font-medium text-xl "
                                 >
                                     About
                                 </Link>
@@ -70,28 +70,30 @@ export default function Navbar() {
 
                             <li>
                                 <span
-                                    className=" font-semibold text-xl "
+                                    className=" font-medium text-xl "
                                     onClick={() => setOpen(!open)}
                                 >
                                     Type
                                 </span>
                                 {open && (
                                     <ul className="p-2">
-                                        <li>
+                                        {tipeProperty?.map((tipe, index) => (
+                                        <li key={index}>
                                             <Link
-                                                href="/type/{section}"
-                                                className=" font-semibold text-xl "
+                                                href={`/property/${tipe?.slug}`}
+                                                className=" font-medium text-xl "
                                             >
-                                                Standart
+                                                {tipe?.name}
                                             </Link>
                                         </li>
+                                        ))}
                                     </ul>
                                 )}
                             </li>
                             <li>
                                 <Link
                                     href="/blog"
-                                    className=" font-semibold text-xl "
+                                    className=" font-medium text-xl "
                                 >
                                     Blog
                                 </Link>
@@ -100,61 +102,53 @@ export default function Navbar() {
                     </div>
                     <Link href="/">
                         <img
-                            src="/storage/images/content/Logo_header.png"
+                            src="/storage/images/content/Logo_Alpen.png"
                             alt="Logo"
-                            className="w-[8rem] lg:w-[12rem] cursor-pointer"
+                            className="w-[8rem] lg:w-[12rem] cursor-pointer filter invert"
                         />
                     </Link>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li>
-                            <Link href="/" className=" font-semibold text-xl ">
+                            <Link href="/" className=" font-medium text-xl ">
                                 Home
                             </Link>
                         </li>
                         <li>
                             <Link
                                 href="/about"
-                                className=" font-semibold text-xl "
+                                className=" font-medium text-xl "
                             >
                                 About
                             </Link>
                         </li>
                         <li tabIndex={0}>
                             <details>
-                                <summary className=" font-semibold text-xl">
+                                <summary className=" font-medium text-xl">
                                     Type
                                 </summary>
                                 <ul
-                                    className="p-2 z-[1200]"
-                                    style={
-                                        location === "/" && scroll <= 1.5
-                                            ? {
-                                                  backgroundColor: "#0D7377",
-                                                  marginTop: "-.1rem",
-                                              }
-                                            : {
-                                                  backgroundColor: "#0D7377",
-                                                  marginTop: "-.1rem",
-                                              }
-                                    }
+                                    className="p-2 z-[1200] bg-primary-custom shadow-lg rounded-sm w-52 "
+
                                 >
-                                    <li>
+                                    {tipeProperty?.map((tipe, index) => (
+                                    <li key={index}>
                                         <Link
-                                            href="/type/{section}"
-                                            className=" font-semibold text-xl "
+                                            href={`/property/${tipe?.slug}`}
+                                            className=" font-normal text-xl "
                                         >
-                                            Standard
+                                            {tipe?.name}
                                         </Link>
                                     </li>
+                                    ))}
                                 </ul>{" "}
                             </details>
                         </li>
                         <li>
                             <Link
                                 href="/blog"
-                                className=" font-semibold text-xl "
+                                className=" font-medium text-xl "
                             >
                                 Blog
                             </Link>

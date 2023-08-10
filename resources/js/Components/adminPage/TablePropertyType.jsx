@@ -5,7 +5,7 @@ import ModalTambahTypeProperty from "./ModalTambahTypeProperty";
 import ModalEditTypeProperty from "./ModalEditTypeProperty";
 
 const TablePropertyType = ({ propertyType }) => {
-    console.log(propertyType);
+
 
     const [editTypeProperty, setEditTypeProperty] = useState(null);
 
@@ -15,10 +15,10 @@ const TablePropertyType = ({ propertyType }) => {
         window.modal_edit_type_property.showModal();
     };
 
-    const deleteTypePropertyHandle = (e, slug) => {
+    const deleteTypePropertyHandle = (e, id) => {
         e.preventDefault();
         if (confirm("Are you sure you want to delete this item?")) {
-            router.delete(`/admin/typeProperty/delete/${slug}`, {
+            router.delete(`/admin/typeProperty/delete/${id}`, {
                 preserveScroll: true,
                 onSuccess: () => {},
                 onError: (errors) => {
@@ -38,7 +38,7 @@ const TablePropertyType = ({ propertyType }) => {
                         }
                         className="bg-green-500 hover:bg-green-700 text-white font-bold py-2  px-4 rounded w-auto"
                     >
-                        Tambah Category <i className="fas fa-plus"></i>
+                        Tambah Tipe Property <i className="fas fa-plus"></i>
                     </button>
                 </div>
             </div>
@@ -48,6 +48,7 @@ const TablePropertyType = ({ propertyType }) => {
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th>Price</th>
                         <th>Created At</th>
                         <th>Updated At</th>
                         <th>Action</th>
@@ -58,6 +59,12 @@ const TablePropertyType = ({ propertyType }) => {
                         <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{item?.name}</td>
+                            <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(item?.price)}
+                            </td>
                             <td>
                                 {moment(item?.created_at).format(
                                     "DD MMMM YYYY h:mm a"
@@ -70,9 +77,10 @@ const TablePropertyType = ({ propertyType }) => {
                             </td>
                             <td className="flex gap-3 items-center">
                                 <Link
-                                href={`/admin/typeProperty/${item.id}`}
-                                className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
-                                    Spesifikasi
+                                    href={`/admin/typeProperty/${item.id}`}
+                                    className="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
+                                >
+                                    Spesifikasi & fasilitas
                                 </Link>
 
                                 <button
@@ -85,7 +93,7 @@ const TablePropertyType = ({ propertyType }) => {
                                 </button>
                                 <button
                                     onClick={(e) =>
-                                        deleteTypePropertyHandle(e, item.slug)
+                                        deleteTypePropertyHandle(e, item.id)
                                     }
                                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                 >

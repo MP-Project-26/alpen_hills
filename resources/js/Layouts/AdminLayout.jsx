@@ -17,7 +17,7 @@ const AdminLayout = ({ children, title, auth, flash }) => {
                 <Header auth={auth} toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>
                 <div className="w-full h-full  flex">
                     <Sidebar isSidebarOpen={isSidebarOpen} auth={auth}/>
-                    <main className={`h-auto overflow-auto bg-slate-100 w-full p-4 md:p-8  ${isSidebarOpen ? "blur-sm  brightness-50 " : ""}`}>
+                    <main className={`h-auto overflow-auto bg-blue-gray-50 w-full p-4 md:p-8  ${isSidebarOpen ? "blur-sm  brightness-50 " : ""}`}>
                     <h1 className="text-xl md:text-2xl font-semibold mb-5">{title}</h1>
                         {children}
                     </main>

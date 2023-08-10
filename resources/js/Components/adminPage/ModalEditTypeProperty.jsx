@@ -1,12 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import InputError from "../Form/InputError";
 import { router, useForm } from "@inertiajs/react";
 import slugify from "slugify";
 
+function formatToRupiah(angka) {
+    if (!angka) return "";
+    return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+
+function parseFromRupiah(rupiah) {
+    if (!rupiah) return 0;
+    return parseInt(rupiah.replace(/\./g, ""), 10);
+}
+
 const ModalEditTypeProperty = ({ ...props }) => {
+    const [formattedPrice, setFormattedPrice] = useState("");
     const { data, setData, post, errors, reset } = useForm({
         name: "",
         slug: "",
+        price: "",
     });
 
     useEffect(() => {
@@ -14,7 +27,10 @@ const ModalEditTypeProperty = ({ ...props }) => {
             ...prevData,
             name: props?.editTypeProperty?.name || "",
             slug: props?.editTypeProperty?.slug || "",
+            price: props?.editTypeProperty?.price || "",
         }));
+
+        setFormattedPrice(formatToRupiah(props?.editTypeProperty?.price));
     }, [props.editTypeProperty]);
 
     const handleChange = (e) => {
@@ -22,6 +38,12 @@ const ModalEditTypeProperty = ({ ...props }) => {
         if (name === "name") {
             const slug = slugify(value, { lower: true, strict: true });
             setData((prevData) => ({ ...prevData, [name]: value, slug }));
+        }  else if (name === "price") {
+            const numericPrice = parseFromRupiah(value);
+            const formatted = formatToRupiah(numericPrice);
+            const stringPrice = numericPrice.toString();
+            setData((prevData) => ({ ...prevData, [name]: stringPrice }));
+            setFormattedPrice(formatted);
         } else {
             setData((prevData) => ({ ...prevData, [name]: value }));
         }
@@ -93,6 +115,22 @@ const ModalEditTypeProperty = ({ ...props }) => {
                                 />
                                 <InputError
                                     message={errors.slug}
+                                    className="mt-1"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="price">Price :</label>
+                                <input
+                                    className="rounded-md"
+                                    type="text"
+                                    id="price"
+                                    name="price"
+                                    value={formattedPrice}
+                                    onChange={handleChange}
+                                />
+                                <InputError
+                                    message={errors.price}
                                     className="mt-1"
                                 />
                             </div>

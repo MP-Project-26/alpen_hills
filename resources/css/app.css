@@ -15,6 +15,18 @@
     @apply bg-[#213559];
   }
 
+  .btn-warning-custom {
+    @apply bg-[#FFD700];
+  }
+  .btn-success-custom {
+    @apply bg-[#1B8C20];
+  }
+
+
+  .bg-warning-custom {
+    @apply bg-[#FFD700];
+  }
+
   .text-primary-custom {
     @apply text-[#213559];
   }
@@ -151,6 +163,18 @@ button[aria-label="Insert youtube/vimeo video"] {
 .jodit-status-bar__item-right {
   display: none;
 }
+
+/*buatkan animasi muncul untuk .transitioning*/
+
+
+.transitioning {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+
+
 
 
 

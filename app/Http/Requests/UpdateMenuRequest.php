@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSpefisikasiPropertyRequest extends FormRequest
+class UpdateMenuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,18 +22,7 @@ class UpdateSpefisikasiPropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'icon' => 'required',
-            'attribute' => 'required',
-            'value' => 'required',
-        ];
-    }
-
-    public function messages(){
-        return [
-            'icon.required' => 'Icon Harus Diisi !',
-            'attribute.required' => 'Attribute Harus Diisi !',
-            'value.required' => 'Value Harus Diisi !',
+            //
         ];
     }
 }

@@ -1,12 +1,26 @@
-import { useForm } from "@inertiajs/react";
-import React from "react";
+import { router, useForm } from "@inertiajs/react";
+import React, { useState } from "react";
 import slugify from "slugify";
 import InputError from "../Form/InputError";
 
-const ModalTambahTypeProperty = ( ) => {
+
+function formatToRupiah(angka) {
+    if (!angka) return "";
+    return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+
+function parseFromRupiah(rupiah) {
+    if (!rupiah) return 0;
+    return parseInt(rupiah.replace(/\./g, ""), 10);
+}
+
+const ModalTambahTypeProperty = () => {
+    const [formattedPrice, setFormattedPrice] = useState("");
     const { data, setData, post, errors, reset } = useForm({
         name: "",
         slug: "",
+        price: "",
     });
 
     const handleChange = (e) => {
@@ -14,6 +28,12 @@ const ModalTambahTypeProperty = ( ) => {
         if (name === "name") {
             const slug = slugify(value, { lower: true, strict: true });
             setData((prevData) => ({ ...prevData, [name]: value, slug }));
+        } else if (name === "price") {
+            const numericPrice = parseFromRupiah(value);
+            const formatted = formatToRupiah(numericPrice);
+            const stringPrice = numericPrice.toString();
+            setData((prevData) => ({ ...prevData, [name]: stringPrice }));
+            setFormattedPrice(formatted);
         } else {
             setData((prevData) => ({ ...prevData, [name]: value }));
         }
@@ -22,9 +42,11 @@ const ModalTambahTypeProperty = ( ) => {
     const submitHandler = (e) => {
         e.preventDefault();
         post("/admin/typeProperty/add", {
+            preserveScroll: true,
             onSuccess: () => {
-                window.modal_tambah_type_property.close();
                 reset();
+                setFormattedPrice("");
+                window.modal_tambah_type_property.close();
             },
         });
 
@@ -41,7 +63,9 @@ const ModalTambahTypeProperty = ( ) => {
                     className="modal-box w-full max-w-5xl lg:w-[30%] md:w-[60%] rounded-md"
                 >
                     <button
-                        onClick={() => window.modal_tambah_type_property.close()}
+                        onClick={() =>
+                            window.modal_tambah_type_property.close()
+                        }
                         className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                     >
                         ✕
@@ -65,7 +89,10 @@ const ModalTambahTypeProperty = ( ) => {
                                     value={data.name}
                                     onChange={handleChange}
                                 />
-                                 <InputError message={errors.name} className="mt-1" />
+                                <InputError
+                                    message={errors.name}
+                                    className="mt-1"
+                                />
                             </div>
 
                             <div className="flex flex-col gap-1">
@@ -79,7 +106,26 @@ const ModalTambahTypeProperty = ( ) => {
                                     value={data.slug}
                                     onChange={handleChange}
                                 />
-                                 <InputError message={errors.slug} className="mt-1" />
+                                <InputError
+                                    message={errors.slug}
+                                    className="mt-1"
+                                />
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="price">Price :</label>
+                                <input
+                                    className="rounded-md"
+                                    type="text"
+                                    id="price"
+                                    name="price"
+                                    value={formattedPrice}
+                                    onChange={handleChange}
+                                />
+                                <InputError
+                                    message={errors.price}
+                                    className="mt-1"
+                                />
                             </div>
 
                             <button className="btn bg-blue-500 text-white hover:bg-blue-300">

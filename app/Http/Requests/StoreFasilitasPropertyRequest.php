@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSpefisikasiPropertyRequest extends FormRequest
+class StoreFasilitasPropertyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class UpdateSpefisikasiPropertyRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tipe_property_id' => 'required|exists:tipe_properties,id',
 
-            'icon' => 'required',
             'attribute' => 'required',
             'value' => 'required',
         ];
@@ -31,7 +31,8 @@ class UpdateSpefisikasiPropertyRequest extends FormRequest
 
     public function messages(){
         return [
-            'icon.required' => 'Icon Harus Diisi !',
+            'tipe_property_id.required' => 'Tipe Property Harus Diisi !',
+            'tipe_property_id.exists' => 'Tipe Property Tidak Ditemukan !',
             'attribute.required' => 'Attribute Harus Diisi !',
             'value.required' => 'Value Harus Diisi !',
         ];

@@ -1,12 +1,14 @@
 import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import React from "react";
 import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
 const GuestLayout = ({ children, title }) => {
+
+    const { tipeProperty } = usePage().props;
     const scrollTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -34,7 +36,7 @@ const GuestLayout = ({ children, title }) => {
     return (
         <>
             {title && <Head title={title} />}
-            <Navbar />
+            <Navbar  tipeProperty={tipeProperty}/>
             <main className="-mt-[5rem] relative">
                 {children}
                 <div

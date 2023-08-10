@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSpefisikasiPropertyRequest extends FormRequest
+class UpdateFasilitasPropertyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,6 @@ class UpdateSpefisikasiPropertyRequest extends FormRequest
     {
         return [
 
-            'icon' => 'required',
             'attribute' => 'required',
             'value' => 'required',
         ];

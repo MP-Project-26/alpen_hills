@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\CategoryGallery;
 use App\Models\CategoryPost;
 use App\Models\Comment;
+use App\Models\FasilitasProperty;
 use App\Models\Gallery;
 use App\Models\Post;
 use App\Models\SpefisikasiProperty;
@@ -79,19 +80,22 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Tipe 4 Meter',
                 'slug' => 'tipe-4-meter',
+                'price' => 600000000,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Tipe 6 Meter',
                 'slug' => 'tipe-6-meter',
+                'price' => 800000000,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
         ]);
-        Gallery ::factory(5)->create();
+        Gallery::factory(5)->create();
 
         SpefisikasiProperty::factory(15)->create();
+        FasilitasProperty::factory(15)->create();
 
         CategoryPost::insert([
             [
