@@ -20,10 +20,12 @@ const Price = ({ product }) => {
             </div>
 
             <div className="flex gap-3 ">
-                <Link className="btn  btn-warning-custom hover:bg-yellow-500 font-bold md:text-xl text-md text-black rounded-none  border-none">
+                <Link
+                    href="/simulasi_kpr"
+                 className="btn  btn-warning-custom hover:bg-yellow-500 font-bold md:text-xl text-md text-black rounded-none  border-none">
                     SIMULASI KPR
                 </Link>
-                <Link className="btn btn-success-custom hover:bg-green-500 font-bold md:text-xl text-md text-white rounded-none hover:bg-opacity-75 border-none">
+                <Link hrfe="/order" className="btn btn-success-custom hover:bg-green-500 font-bold md:text-xl text-md text-white rounded-none hover:bg-opacity-75 border-none">
                     PESAN UNIT
                 </Link>
             </div>
