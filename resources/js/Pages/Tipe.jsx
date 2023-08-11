@@ -138,8 +138,6 @@ const Tipe = ({ ...props }) => {
                 <div className="w-auto flex flex-col lg:px-36 md:px-16 px-4">
                     <Price product={props.product} />
                     <Spesifikasi product={props.product} />
-
-                    
                 </div>
 
                 {selectedGallery && (
